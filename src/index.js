@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const router = require('./routes');
+const errorDetailsResponseMiddleware = require('./middleware/detailed-error-response');
 
 const app = express();
 
@@ -20,8 +21,10 @@ require('./database/dbConnection');
 app.use(router);
 
 app.use('/', (req, res) => {
-  res.send('melcow');
+  res.send('welcome to uaeassistant');
 });
+
+app.use(errorDetailsResponseMiddleware);
 
 const PORT = process.env.PORT || 3000;
 
