@@ -30,7 +30,6 @@ module.exports = {
       },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
-      freezeTableName: true,
     });
   },
 
