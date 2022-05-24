@@ -13,11 +13,11 @@ module.exports = {
         allowNull: false,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(2000),
         allowNull: false,
       },
       images: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.ARRAY(Sequelize.STRING(2000)),
         allowNull: false,
       },
       price: {
@@ -25,8 +25,8 @@ module.exports = {
         allowNull: false,
       },
       videoView: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
-        allowNull: false,
+        type: Sequelize.ARRAY(Sequelize.STRING(2000)),
+        allowNull: true,
       },
       propertyType: {
         type: Sequelize.STRING,
@@ -53,7 +53,7 @@ module.exports = {
         allowNull: false,
       },
       amenities: {
-        type: Sequelize.ARRAY(Sequelize.STRING),
+        type: Sequelize.ARRAY(Sequelize.STRING(1000)),
         allowNull: true,
       },
       referenceNo: {
@@ -72,7 +72,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      agentORN: {
+      agentBRN: {
         type: Sequelize.STRING,
         allowNull: true,
       },

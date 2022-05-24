@@ -8,9 +8,22 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
       },
-      agentName: {
+      username: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false,
+      },
+      password: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      role: {
+        type: Sequelize.STRING,
+        default: 'AGENT',
+      },
+      agentName: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       agentImage: {
         type: Sequelize.STRING,
@@ -18,21 +31,21 @@ module.exports = {
       },
       position: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       yearsOfExperience: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       languages: {
         type: Sequelize.ARRAY(Sequelize.STRING),
-        allowNull: false,
+        allowNull: true,
       },
       agencyName: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
-      agenyLogo: {
+      agencyLogo: {
         type: Sequelize.STRING,
         allowNull: true,
       },

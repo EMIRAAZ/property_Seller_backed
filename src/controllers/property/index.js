@@ -7,10 +7,10 @@ async function addProperty(req, res) {
   const addressBody = {
     id: generateUniqueID(),
     placeAddress: body.placeAddress,
-    building: body.building,
     city: body.city,
-    latitude: body.latitude,
-    longitude: body.longitude,
+    ...(body.building ? { building: body.building } : {}),
+    ...(body.latitude ? { latitude: body.latitude } : {}),
+    ...(body.longitude ? { longitude: body.longitude } : {}),
   };
 
   const propertyBody = {
@@ -19,19 +19,12 @@ async function addProperty(req, res) {
     description: body.description,
     images: body.images,
     price: body.price,
-    videoView: body.videoView,
     propertyType: body.propertyType,
     propertySize: body.propertySize,
     propertySizeUnit: body.propertySizeUnit,
     propertyAge: body.propertyAge,
     noOfBedroom: body.noOfBedroom,
     noOfBathroom: body.noOfBathroom,
-    amenities: body.amenities,
-    referenceNo: body.referenceNo,
-    trakheesiPermit: body.trakheesiPermit,
-    ownership: body.ownership,
-    brokerORN: body.brokerORN,
-    agentORN: body.agentORN,
     call: body.call,
     email: body.email,
     whatsapp: body.whatsapp,
@@ -42,6 +35,13 @@ async function addProperty(req, res) {
     noOfShare: body.noOfShare,
     noOfReport: body.noOfReport,
     agentId: body.agentId,
+    ...(body.videoView ? { videoView: body.videoView } : {}),
+    ...(body.amenities ? { amenities: body.amenities } : {}),
+    ...(body.referenceNo ? { referenceNo: body.referenceNo } : {}),
+    ...(body.trakheesiPermit ? { trakheesiPermit: body.trakheesiPermit } : {}),
+    ...(body.ownership ? { ownership: body.ownership } : {}),
+    ...(body.brokerORN ? { brokerORN: body.brokerORN } : {}),
+    ...(body.agentBRN ? { agentBRN: body.agentBRN } : {}),
   };
 
   const property = await propertyService.addPropertyService(
@@ -62,7 +62,38 @@ async function listProperty(req, res) {
   return res.status(200).json({ status: 200, data: properties });
 }
 
+async function listPropertyById(req, res) {
+  const { id } = req.params;
+
+  const property = await propertyService.listPropertyByIdService(id);
+  return res.status(200).json({ status: 200, data: [property] });
+}
+
+async function updatePropertyById(req, res) {
+  const { id } = req.params;
+  const body = { ...req.body };
+  const property = await propertyService.updatePropertyById(id, body);
+  return res.status(200).json({
+    status: 200,
+    message: 'Successfully updated Property',
+    data: [property],
+  });
+}
+
+async function deletePropertyById(req, res) {
+  const { id } = req.params;
+  await propertyService.deletepropertyById(id);
+
+  return res.status(200).json({
+    status: 200,
+    message: 'Successfully deleted Property',
+  });
+}
+
 module.exports = {
-  addProperty,
-  listProperty,
+  addProperty: [addProperty],
+  listProperty: [listProperty],
+  listPropertyById: [listPropertyById],
+  updatePropertyById: [updatePropertyById],
+  deletePropertyById: [deletePropertyById],
 };
