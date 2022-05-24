@@ -82,7 +82,7 @@ async function updatePropertyById(req, res) {
 
 async function deletePropertyById(req, res) {
   const { id } = req.params;
-  await propertyService.deletepropertyById(id);
+  await propertyService.deletePropertyById(id);
 
   return res.status(200).json({
     status: 200,
