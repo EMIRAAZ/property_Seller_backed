@@ -15,6 +15,11 @@ router.get('/property/:id', propertyRoutes.listPropertyById);
 router.patch('/property/:id', propertyRoutes.updatePropertyById);
 router.delete('/property/:id', propertyRoutes.deletePropertyById);
 
+router.get('/agent/property', propertyRoutes.listPropertyByAgent);
+router.get('/agent/property/:id', propertyRoutes.listPropertyByIdByAgent);
+router.patch('/agent/property/:id', propertyRoutes.updatePropertyByAgent);
+router.delete('/agent/property/:id', propertyRoutes.deletePropertyByAgent);
+
 // agent
 const agentRoutes = require('../controllers/agent');
 

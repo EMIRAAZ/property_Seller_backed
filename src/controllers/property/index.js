@@ -1,5 +1,7 @@
 const { generateUniqueID } = require('../../utils');
 const propertyService = require('./service');
+const authRole = require('../../middleware/role');
+const verify = require('../../middleware/verify-token');
 
 async function addProperty(req, res) {
   const body = { ...req.body };
@@ -90,10 +92,69 @@ async function deletePropertyById(req, res) {
   });
 }
 
+//agent property
+
+async function listPropertyByAgent(req, res) {
+  const query = { ...req.query };
+  const agentId = req.user._id;
+  const properties = await propertyService.listPropertyServiceByAgent(
+    agentId,
+    query
+  );
+  return res.status(200).json({ status: 200, data: properties });
+}
+
+async function listPropertyByIdByAgent(req, res) {
+  const { id } = req.params;
+  const agentId = req.user._id;
+
+  const property = await propertyService.listPropertyByIdByAgentService(
+    agentId,
+    id
+  );
+  return res.status(200).json({ status: 200, data: [property] });
+}
+
+async function updatePropertyByAgent(req, res) {
+  const { id } = req.params;
+  const agentId = req.user._id;
+  const body = { ...req.body };
+  const property = await propertyService.updatePropertyByAgent(
+    agentId,
+    id,
+    body
+  );
+  return res.status(200).json({
+    status: 200,
+    message: 'Successfully updated Property',
+    data: [property],
+  });
+}
+
+async function deletePropertyByAgent(req, res) {
+  const { id } = req.params;
+  const agentId = req.user._id;
+
+  await propertyService.deletePropertyByAgent(agentId, id);
+
+  return res.status(200).json({
+    status: 200,
+    message: 'Successfully deleted Property',
+  });
+}
+
 module.exports = {
-  addProperty: [addProperty],
-  listProperty: [listProperty],
-  listPropertyById: [listPropertyById],
-  updatePropertyById: [updatePropertyById],
-  deletePropertyById: [deletePropertyById],
+  addProperty: [verify, authRole(['ADMIN', 'AGENT']), addProperty],
+  listProperty: [verify, authRole(['ADMIN']), listProperty],
+  listPropertyById: [verify, authRole(['ADMIN']), listPropertyById],
+  updatePropertyById: [verify, authRole(['ADMIN']), updatePropertyById],
+  deletePropertyById: [verify, authRole(['ADMIN']), deletePropertyById],
+  listPropertyByAgent: [verify, authRole(['AGENT']), listPropertyByAgent],
+  listPropertyByIdByAgent: [
+    verify,
+    authRole(['AGENT']),
+    listPropertyByIdByAgent,
+  ],
+  updatePropertyByAgent: [verify, authRole(['AGENT']), updatePropertyByAgent],
+  deletePropertyByAgent: [verify, authRole(['AGENT']), deletePropertyByAgent],
 };

@@ -1,5 +1,7 @@
 const { generateUniqueID } = require('../../utils');
 const agentService = require('./service');
+const authRole = require('../../middleware/role');
+const verify = require('../../middleware/verify-token');
 
 async function registerAgent(req, res) {
   const body = { ...req.body };
@@ -73,10 +75,10 @@ async function deleteAgentById(req, res) {
 }
 
 module.exports = {
-  registerAgent: [registerAgent],
+  registerAgent: [verify, authRole(['ADMIN']), registerAgent],
   loginAgent: [loginAgent],
-  listAgent: [listAgent],
-  listAgentById: [listAgentById],
-  updateAgentById: [updateAgentById],
-  deleteAgentById: [deleteAgentById],
+  listAgent: [verify, authRole(['ADMIN']), listAgent],
+  listAgentById: [verify, authRole(['ADMIN']), listAgentById],
+  updateAgentById: [verify, authRole(['ADMIN']), updateAgentById],
+  deleteAgentById: [verify, authRole(['ADMIN']), deleteAgentById],
 };
