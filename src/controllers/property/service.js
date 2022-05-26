@@ -39,54 +39,46 @@ async function listPropertyService(query) {
               placeAddress: sequelize.where(
                 sequelize.fn('LOWER', sequelize.col('placeAddress')),
                 'LIKE',
-                `%${location}%`
+                `%${location.toLowerCase()}%`
               ),
             },
             {
               building: sequelize.where(
                 sequelize.fn('LOWER', sequelize.col('building')),
                 'LIKE',
-                `%${location}%`
+                `%${location.toLowerCase()}%`
               ),
             },
             {
               city: sequelize.where(
                 sequelize.fn('LOWER', sequelize.col('city')),
                 'LIKE',
-                `%${location}%`
-              ),
-            },
-          ],
-        },
-        placeAddress && {
-          [Op.or]: [
-            {
-              placeAddress: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('placeAddress')),
-                'LIKE',
-                `%${placeAddress}%`
+                `%${location.toLowerCase()}%`
               ),
             },
           ],
         },
         city && {
           [Op.or]: [
+            placeAddress && {
+              placeAddress: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('placeAddress')),
+                'LIKE',
+                `%${placeAddress.toLowerCase()}%`
+              ),
+            },
             {
               city: sequelize.where(
                 sequelize.fn('LOWER', sequelize.col('city')),
                 'LIKE',
-                `%${city}%`
+                `%${city.toLowerCase()}%`
               ),
             },
-          ],
-        },
-        building && {
-          [Op.or]: [
-            {
+            building && {
               building: sequelize.where(
                 sequelize.fn('LOWER', sequelize.col('building')),
                 'LIKE',
-                `%${building}%`
+                `%${building.toLowerCase()}%`
               ),
             },
           ],
@@ -97,7 +89,7 @@ async function listPropertyService(query) {
               propertyType: sequelize.where(
                 sequelize.fn('LOWER', sequelize.col('propertyType')),
                 'LIKE',
-                `%${propertyType}%`
+                `%${propertyType.toLowerCase()}%`
               ),
             },
           ],
@@ -135,7 +127,7 @@ async function listPropertyService(query) {
                 for: sequelize.where(
                   sequelize.fn('LOWER', sequelize.col('for')),
                   'LIKE',
-                  `%${sale}%`
+                  `%${sale.toLowerCase()}%`
                 ),
               },
             ],
