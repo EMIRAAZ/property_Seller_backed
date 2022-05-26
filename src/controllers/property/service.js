@@ -31,6 +31,9 @@ async function listPropertyService(query) {
 
   const properties = await Property.findAndCountAll({
     include: [{ model: Address, as: 'address', required: true }],
+    limit: query.limit || 10,
+    offset: query.offset || 0,
+    order: [[query.sortBy || 'updatedAt', query.sortOrder || 'DESC']],
     where: {
       [Op.and]: [
         location && {

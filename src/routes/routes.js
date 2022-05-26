@@ -30,4 +30,9 @@ router.get('/agent/:id', agentRoutes.listAgentById);
 router.patch('/agent/:id', agentRoutes.updateAgentById);
 router.delete('/agent/:id', agentRoutes.deleteAgentById);
 
+// featured
+const featuredRoutes = require('../controllers/featured');
+
+router.get('/featured', featuredRoutes.listFeaturedProperty);
+
 module.exports = router;
