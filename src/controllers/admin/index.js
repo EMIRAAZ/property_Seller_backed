@@ -27,7 +27,7 @@ async function loginAdmin(req, res) {
 
   return res
     .header('auth-token', token)
-    .header('role', 'AGENT')
+    .header('role', 'ADMIN')
     .status(200)
     .json({ status: 200, message: 'You are logged in' });
 }
