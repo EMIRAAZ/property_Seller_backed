@@ -153,7 +153,10 @@ async function listPropertyService(query) {
 }
 
 async function listPropertyByIdService(id) {
-  const property = await Property.findByPk(id);
+  const property = await Property.find({
+    include: [{ model: Address, as: 'address', required: true }],
+    where: { id: id },
+  });
   return property;
 }
 
