@@ -16,7 +16,8 @@ const storage = multer.diskStorage({
 });
 
 const filterImage = (req, file, cb) => {
-  if (file.mimetype === 'image/svg') {
+  console.log(file.mimetype);
+  if (file.mimetype === 'image/svg' || file.mimetype === 'image/svg+xml') {
     cb(null, true);
   } else cb(new Error('can only upload svg files'), false);
 };
