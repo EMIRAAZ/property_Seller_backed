@@ -105,17 +105,17 @@ module.exports = {
       },
       noOfSave: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         default: 0,
       },
       noOfShare: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         default: 0,
       },
       noOfReport: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
         default: 0,
       },
 
