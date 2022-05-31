@@ -68,7 +68,7 @@ async function listPropertyById(req, res) {
   const { id } = req.params;
 
   const property = await propertyService.listPropertyByIdService(id);
-  return res.status(200).json({ status: 200, data: [property] });
+  return res.status(200).json({ status: 200, data: property });
 }
 
 async function updatePropertyById(req, res) {
