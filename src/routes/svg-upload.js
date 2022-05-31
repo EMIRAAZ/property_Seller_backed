@@ -29,6 +29,6 @@ const upload = multer({
   fileFilter: filterImage,
 });
 
-router.post('/upload-svg', upload.single('file'), uploadController.uploadImage);
+router.post('/upload-svg', upload.single('file'), uploadController.uploadSVG);
 
 module.exports = router;
