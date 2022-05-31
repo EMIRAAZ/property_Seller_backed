@@ -35,4 +35,14 @@ const featuredRoutes = require('../controllers/featured');
 
 router.get('/featured', featuredRoutes.listFeaturedProperty);
 
+// amenity
+
+const amenityRoutes = require('../controllers/amenity');
+
+router.post('/amenity', amenityRoutes.addAmenity);
+router.get('/amenity', amenityRoutes.listAmenity);
+router.get('/amenity/:id', amenityRoutes.listAmenityById);
+router.patch('/amenity/:id', amenityRoutes.updateAmenityById);
+router.delete('/amenity/:id', amenityRoutes.deleteAmenityById);
+
 module.exports = router;
