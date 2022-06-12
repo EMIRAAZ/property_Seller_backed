@@ -29,7 +29,7 @@ const Property = sequelize.define(
       allowNull: false,
     },
     videoView: {
-      type: Sequelize.ARRAY(Sequelize.STRING(2000)),
+      type: Sequelize.STRING,
       allowNull: true,
     },
     propertyType: {
@@ -106,11 +106,6 @@ const Property = sequelize.define(
       type: Sequelize.STRING,
       allowNull: false,
       default: 'both',
-    },
-    noOfSave: {
-      type: Sequelize.INTEGER,
-      allowNull: true,
-      default: 0,
     },
     noOfShare: {
       type: Sequelize.INTEGER,
