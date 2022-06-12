@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database/dbConnection');
+const Agency = require('./Agency');
 
 const Agent = sequelize.define(
   'agent',
@@ -42,14 +43,6 @@ const Agent = sequelize.define(
       type: Sequelize.ARRAY(Sequelize.STRING),
       allowNull: true,
     },
-    agencyName: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
-    agencyLogo: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   },
@@ -57,5 +50,9 @@ const Agent = sequelize.define(
     freezeTableName: true,
   }
 );
+Agent.belongsTo(Agency, {
+  foreignKey: 'agencyId',
+  as: 'agency',
+});
 
 module.exports = Agent;
