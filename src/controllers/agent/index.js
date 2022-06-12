@@ -11,6 +11,8 @@ async function registerAgent(req, res) {
     username: body.username,
     password: body.password,
     role: 'AGENT',
+    agencyId: body,
+    agencyId,
     ...(body.agentName ? { agentName: body.agentName } : {}),
     ...(body.agentImage ? { agentImage: body.agentImage } : {}),
     ...(body.position ? { position: body.position } : {}),

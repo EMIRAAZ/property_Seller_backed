@@ -11,7 +11,7 @@ const Agency = sequelize.define(
     },
     agencyName: {
       type: Sequelize.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     agencyLogo: {
       type: Sequelize.STRING,

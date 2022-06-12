@@ -37,6 +37,7 @@ async function addProperty(req, res) {
     ...(body.noOfShare ? { noOfShare: body.noOfShare } : {}),
     ...(body.noOfReport ? { noOfReport: body.noOfReport } : {}),
     agentId: body.agentId,
+    agencyId: body.agencyId,
     ...(body.videoView ? { videoView: body.videoView } : {}),
     ...(body.amenities ? { amenities: body.amenities } : {}),
     ...(body.trakheesiPermit ? { trakheesiPermit: body.trakheesiPermit } : {}),
