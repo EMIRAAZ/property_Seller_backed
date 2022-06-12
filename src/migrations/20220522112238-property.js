@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
       },
       videoView: {
-        type: Sequelize.ARRAY(Sequelize.STRING(2000)),
+        type: Sequelize.STRING,
         allowNull: true,
       },
       propertyType: {
@@ -103,11 +103,6 @@ module.exports = {
         allowNull: false,
         default: 'both',
       },
-      noOfSave: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        default: 0,
-      },
       noOfShare: {
         type: Sequelize.INTEGER,
         allowNull: true,
@@ -117,6 +112,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
         default: 0,
+      },
+      verified: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        default: false,
       },
 
       createdAt: Sequelize.DATE,

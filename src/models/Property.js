@@ -117,6 +117,11 @@ const Property = sequelize.define(
       allowNull: true,
       default: 0,
     },
+    verified: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      default: false,
+    },
 
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
