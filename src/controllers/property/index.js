@@ -18,6 +18,7 @@ async function addProperty(req, res) {
   const propertyBody = {
     id: generateUniqueID(),
     title: body.title,
+    mainTitle: body.mainTitle,
     description: body.description,
     images: body.images,
     price: body.price,
