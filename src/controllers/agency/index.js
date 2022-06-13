@@ -17,7 +17,7 @@ async function addAgency(req, res) {
     ...(body.agencyLogo ? { agencyLogo: body.agencyLogo } : {}),
   };
 
-  const agency = await agencyService.addAmenityService(agencyBody);
+  const agency = await agencyService.addAgencyService(agencyBody);
 
   return res.status(201).json({
     status: 201,
