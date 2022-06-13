@@ -6,7 +6,7 @@ async function addAgencyService(agencyBody) {
 }
 
 async function listAgencyService() {
-  const agencys = await Agency.findAll();
+  const agencys = await Agency.findAndCountAll();
   return agencys;
 }
 
