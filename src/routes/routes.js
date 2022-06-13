@@ -35,6 +35,7 @@ const agentRoutes = require('../controllers/agent');
 router.post('/register-agent', agentRoutes.registerAgent);
 router.post('/login-agent', agentRoutes.loginAgent);
 router.get('/agent', agentRoutes.listAgent);
+router.get('/agent/agency/:id', agentRoutes.listAgentByAgency);
 router.get('/agent/:id', agentRoutes.listAgentById);
 router.patch('/agent/:id', agentRoutes.updateAgentById);
 router.delete('/agent/:id', agentRoutes.deleteAgentById);

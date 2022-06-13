@@ -73,10 +73,18 @@ async function deleteAgentById(req, res) {
   });
 }
 
+async function listAgentByAgency(req, res) {
+  const { id } = req.params;
+
+  const agent = await agentService.listAgentByAgencyService(id);
+  return res.status(200).json({ status: 200, data: [agent] });
+}
+
 module.exports = {
   registerAgent: [verify, authRole(['ADMIN']), registerAgent],
   loginAgent: [loginAgent],
   listAgent: [verify, authRole(['ADMIN']), listAgent],
+  listAgentByAgency: [verify, authRole(['ADMIN']), listAgentByAgency],
   listAgentById: [verify, authRole(['ADMIN']), listAgentById],
   updateAgentById: [verify, authRole(['ADMIN']), updateAgentById],
   deleteAgentById: [verify, authRole(['ADMIN']), deleteAgentById],

@@ -57,6 +57,11 @@ async function listAgentByIdService(id) {
   return agent;
 }
 
+async function listAgentByAgencyService(agencyId) {
+  const agent = await Agent.findAll({ where: { agencyId: agencyId } });
+  return agent;
+}
+
 async function updateAgentById(id, body) {
   const agent = await Agent.update({ ...body }, { where: { id: id } });
   return agent;
@@ -74,4 +79,5 @@ module.exports = {
   listAgentByIdService,
   updateAgentById,
   deleteAgentById,
+  listAgentByAgencyService,
 };
