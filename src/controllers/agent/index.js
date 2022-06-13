@@ -11,8 +11,7 @@ async function registerAgent(req, res) {
     username: body.username,
     password: body.password,
     role: 'AGENT',
-    agencyId: body,
-    agencyId,
+    agencyId: body.agencyId,
     ...(body.agentName ? { agentName: body.agentName } : {}),
     ...(body.agentImage ? { agentImage: body.agentImage } : {}),
     ...(body.position ? { position: body.position } : {}),
@@ -20,8 +19,6 @@ async function registerAgent(req, res) {
       ? { yearsOfExperience: body.yearsOfExperience }
       : {}),
     ...(body.languages ? { languages: body.languages } : {}),
-    ...(body.agencyName ? { agencyName: body.agencyName } : {}),
-    ...(body.agencyLogo ? { agencyLogo: body.agencyLogo } : {}),
   };
 
   const agent = await agentService.registerAgentService(agentBody);
