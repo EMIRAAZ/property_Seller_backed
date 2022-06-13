@@ -33,6 +33,7 @@ async function addProperty(req, res) {
     whatsapp: body.whatsapp,
     featured: body.featured,
     luxury: body.luxury,
+    verified: body.verified,
     referenceNo: generateUniqueID(),
     for: body.for,
     ...(body.noOfShare ? { noOfShare: body.noOfShare } : {}),
