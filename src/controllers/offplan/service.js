@@ -24,31 +24,6 @@ async function listOffplanService(query) {
     order: [[query.sortBy || 'updatedAt', query.sortOrder || 'DESC']],
     where: {
       [Op.and]: [
-        location && {
-          [Op.or]: [
-            {
-              placeAddress: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('placeAddress')),
-                'LIKE',
-                `%${location.toLowerCase()}%`
-              ),
-            },
-            {
-              building: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('building')),
-                'LIKE',
-                `%${location.toLowerCase()}%`
-              ),
-            },
-            {
-              city: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('city')),
-                'LIKE',
-                `%${location.toLowerCase()}%`
-              ),
-            },
-          ],
-        },
         city && {
           [Op.or]: [
             placeAddress && {

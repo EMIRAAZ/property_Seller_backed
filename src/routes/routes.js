@@ -55,4 +55,12 @@ router.get('/amenity/:id', amenityRoutes.listAmenityById);
 router.patch('/amenity/:id', amenityRoutes.updateAmenityById);
 router.delete('/amenity/:id', amenityRoutes.deleteAmenityById);
 
+const offplanRoutes = require('../controllers/offplan');
+
+router.post('/offplan', offplanRoutes.addOffplan);
+router.get('/offplan', offplanRoutes.listOffplan);
+router.get('/offplan/:id', offplanRoutes.listOffplanById);
+router.patch('/offplan/:id', offplanRoutes.updateOffplanById);
+router.delete('/offplan/:id', offplanRoutes.deleteOffplanById);
+
 module.exports = router;
