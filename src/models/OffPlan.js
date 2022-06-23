@@ -2,7 +2,6 @@ const Sequelize = require('sequelize');
 const sequelize = require('../database/dbConnection');
 
 const Agent = require('./Agent');
-const Agency = require('./Agency');
 const Address = require('./Address');
 
 const OffPlan = sequelize.define(
@@ -58,10 +57,6 @@ OffPlan.belongsTo(Agent, {
 OffPlan.belongsTo(Address, {
   foreignKey: 'addressId',
   as: 'address',
-});
-OffPlan.belongsTo(Agency, {
-  foreignKey: 'agencyId',
-  as: 'agency',
 });
 
 module.exports = OffPlan;
