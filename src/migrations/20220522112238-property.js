@@ -60,6 +60,10 @@ module.exports = {
         type: Sequelize.ARRAY(Sequelize.STRING(1000)),
         allowNull: true,
       },
+      neighborhood: {
+        type: Sequelize.ARRAY(Sequelize.STRING(1000)),
+        allowNull: true,
+      },
       referenceNo: {
         type: Sequelize.STRING,
         allowNull: true,

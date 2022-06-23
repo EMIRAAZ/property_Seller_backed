@@ -4,7 +4,6 @@ const sequelize = require('../database/dbConnection');
 const Agent = require('./Agent');
 const Agency = require('./Agency');
 const Address = require('./Address');
-const FamousNeighborhood = require('./FamousNeighborhood');
 
 const Property = sequelize.define(
   'property',
@@ -63,6 +62,10 @@ const Property = sequelize.define(
       allowNull: false,
     },
     amenities: {
+      type: Sequelize.ARRAY(Sequelize.STRING(1000)),
+      allowNull: true,
+    },
+    neighborhood: {
       type: Sequelize.ARRAY(Sequelize.STRING(1000)),
       allowNull: true,
     },
@@ -149,11 +152,6 @@ Property.belongsTo(Address, {
 Property.belongsTo(Agency, {
   foreignKey: 'agencyId',
   as: 'agency',
-});
-
-Property.belongsTo(FamousNeighborhood, {
-  foreignKey: 'neighborhoodId',
-  as: 'famousneighborhood',
 });
 
 module.exports = Property;
