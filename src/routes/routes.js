@@ -63,4 +63,27 @@ router.get('/offplan/:id', offplanRoutes.listOffplanById);
 router.patch('/offplan/:id', offplanRoutes.updateOffplanById);
 router.delete('/offplan/:id', offplanRoutes.deleteOffplanById);
 
+const famousNeighborhoodRoutes = require('../controllers/famousneighborhood');
+
+router.post(
+  '/famousneighborhood',
+  famousNeighborhoodRoutes.addFamousNeighborhood
+);
+router.get(
+  '/famousneighborhood',
+  famousNeighborhoodRoutes.listFamousNeighborhood
+);
+router.get(
+  '/famousneighborhood/:id',
+  famousNeighborhoodRoutes.listFamousNeighborhoodById
+);
+router.patch(
+  '/famousneighborhood/:id',
+  famousNeighborhoodRoutes.updateFamousNeighborhoodById
+);
+router.delete(
+  '/famousneighborhood/:id',
+  famousNeighborhoodRoutes.deleteFamousNeighborhoodById
+);
+
 module.exports = router;
