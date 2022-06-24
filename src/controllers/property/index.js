@@ -42,6 +42,7 @@ async function addProperty(req, res) {
     agencyId: body.agencyId,
     ...(body.videoView ? { videoView: body.videoView } : {}),
     ...(body.amenities ? { amenities: body.amenities } : {}),
+    ...(body.neighborhood ? { neighborhood: body.neighborhood } : {}),
     ...(body.trakheesiPermit ? { trakheesiPermit: body.trakheesiPermit } : {}),
     ...(body.ownership ? { ownership: body.ownership } : {}),
     ...(body.brokerORN ? { brokerORN: body.brokerORN } : {}),

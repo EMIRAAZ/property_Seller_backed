@@ -4,7 +4,7 @@ const Property = require('../../models/Property');
 const Address = require('../../models/Address');
 
 async function addPropertyService(addressBody, propertyBody) {
-  const address = await Address.create(addressBody);
+  await Address.create(addressBody);
   const propertyBodyWithAddressId = {
     ...propertyBody,
     addressId: addressBody.id,
