@@ -10,9 +10,41 @@ module.exports = {
       },
       agencyName: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       agencyLogo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      tradeLicenseNo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      brn: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      website: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      phoneNumber: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      whatsAppNumber: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      officeAddress: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      ownerName: {
         type: Sequelize.STRING,
         allowNull: true,
       },

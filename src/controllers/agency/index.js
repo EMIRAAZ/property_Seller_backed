@@ -15,6 +15,14 @@ async function addAgency(req, res) {
     id: generateUniqueID(),
     agencyName: body.agencyName,
     ...(body.agencyLogo ? { agencyLogo: body.agencyLogo } : {}),
+    ...(body.tradeLicenseNo ? { tradeLicenseNo: body.tradeLicenseNo } : {}),
+    ...(body.brn ? { brn: body.brn } : {}),
+    ...(body.website ? { website: body.website } : {}),
+    ...(body.email ? { email: body.email } : {}),
+    ...(body.phoneNumber ? { phoneNumber: body.phoneNumber } : {}),
+    ...(body.whatsAppNumber ? { whatsAppNumber: body.whatsAppNumber } : {}),
+    ...(body.officeAddress ? { officeAddress: body.officeAddress } : {}),
+    ...(body.ownerName ? { ownerName: body.ownerName } : {}),
   };
 
   const agency = await agencyService.addAgencyService(agencyBody);

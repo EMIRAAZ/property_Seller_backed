@@ -19,6 +19,10 @@ async function registerAgent(req, res) {
       ? { yearsOfExperience: body.yearsOfExperience }
       : {}),
     ...(body.languages ? { languages: body.languages } : {}),
+    ...(body.rera ? { rera: body.rera } : {}),
+    ...(body.orn ? { orn: body.orn } : {}),
+    ...(body.phoneNumber ? { phoneNumber: body.phoneNumber } : {}),
+    ...(body.whatsAppNumber ? { whatsAppNumber: body.whatsAppNumber } : {}),
   };
 
   const agent = await agentService.registerAgentService(agentBody);

@@ -43,6 +43,22 @@ const Agent = sequelize.define(
       type: Sequelize.ARRAY(Sequelize.STRING),
       allowNull: true,
     },
+    rera: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    orn: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    phoneNumber: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    whatsAppNumber: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   },

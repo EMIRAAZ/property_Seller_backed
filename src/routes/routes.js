@@ -86,4 +86,21 @@ router.delete(
   famousNeighborhoodRoutes.deleteFamousNeighborhoodById
 );
 
+const tagheadRoutes = require('../controllers/tagheads');
+
+router.post('/taghead', tagheadRoutes.addtagheads);
+router.get('/taghead', tagheadRoutes.listtagheads);
+router.get('/taghead/:id', tagheadRoutes.listtagheadsById);
+router.patch('/taghead/:id', tagheadRoutes.updatetagheadsById);
+router.delete('/taghead/:id', tagheadRoutes.deletetagheadsById);
+
+const taglineRoutes = require('../controllers/tagline');
+
+router.post('/tagline', taglineRoutes.addtagline);
+router.get('/tagline', taglineRoutes.listtagline);
+router.get('/tagline/:id', taglineRoutes.listtaglineById);
+router.get('/tagline/taghead/:id', taglineRoutes.listtaglineByTagHeadId);
+router.patch('/tagline/:id', taglineRoutes.updatetaglineById);
+router.delete('/tagline/:id', taglineRoutes.deletetaglineById);
+
 module.exports = router;

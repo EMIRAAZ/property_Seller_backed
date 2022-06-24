@@ -40,6 +40,7 @@ async function addProperty(req, res) {
     ...(body.noOfReport ? { noOfReport: body.noOfReport } : {}),
     agentId: body.agentId,
     agencyId: body.agencyId,
+    taglineId: body.taglineId,
     ...(body.videoView ? { videoView: body.videoView } : {}),
     ...(body.amenities ? { amenities: body.amenities } : {}),
     ...(body.neighborhood ? { neighborhood: body.neighborhood } : {}),

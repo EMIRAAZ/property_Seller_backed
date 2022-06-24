@@ -41,11 +41,19 @@ module.exports = {
         type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: true,
       },
-      agencyName: {
+      rera: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      agencyLogo: {
+      orn: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      phoneNumber: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      whatsAppNumber: {
         type: Sequelize.STRING,
         allowNull: true,
       },
