@@ -132,6 +132,11 @@ const Property = sequelize.define(
       allowNull: false,
       default: false,
     },
+    readyToMove: {
+      type: Sequelize.BOOLEAN,
+      allowNull: false,
+      default: false,
+    },
 
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,

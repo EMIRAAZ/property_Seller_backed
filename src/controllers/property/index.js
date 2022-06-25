@@ -34,6 +34,7 @@ async function addProperty(req, res) {
     featured: body.featured,
     luxury: body.luxury,
     verified: body.verified,
+    readyToMove: body.readyToMove,
     referenceNo: generateUniqueID(),
     for: body.for,
     ...(body.noOfShare ? { noOfShare: body.noOfShare } : {}),
