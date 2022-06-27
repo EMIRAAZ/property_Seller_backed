@@ -103,4 +103,28 @@ router.get('/tagline/taghead/:id', taglineRoutes.listtaglineByTagHeadId);
 router.patch('/tagline/:id', taglineRoutes.updatetaglineById);
 router.delete('/tagline/:id', taglineRoutes.deletetaglineById);
 
+const newstopicsRoutes = require('../controllers/newstopics');
+
+router.post('/newstopics', newstopicsRoutes.addnewstopics);
+router.get('/newstopics', newstopicsRoutes.listnewstopics);
+router.get('/newstopics/:id', newstopicsRoutes.listnewstopicsById);
+router.patch('/newstopics/:id', newstopicsRoutes.updatenewstopicsById);
+router.delete('/newstopics/:id', newstopicsRoutes.deletenewstopicsById);
+
+const newsRoutes = require('../controllers/news');
+
+router.post('/news', newsRoutes.addnews);
+router.get('/news', newsRoutes.listnews);
+router.get('/news/:id', newsRoutes.listnewsById);
+router.patch('/news/:id', newsRoutes.updatenewsById);
+router.delete('/news/:id', newsRoutes.deletenewsById);
+
+const blogRoutes = require('../controllers/blog');
+
+router.post('/blog', blogRoutes.addblog);
+router.get('/blog', blogRoutes.listblog);
+router.get('/blog/:id', blogRoutes.listblogById);
+router.patch('/blog/:id', blogRoutes.updateblogById);
+router.delete('/blog/:id', blogRoutes.deleteblogById);
+
 module.exports = router;
