@@ -2,6 +2,8 @@ const { Op } = require('sequelize');
 const sequelize = require('../../database/dbConnection');
 const Property = require('../../models/Property');
 const Address = require('../../models/Address');
+const Agent = require('../../models/Agent');
+const Agency = require('../../models/Agency');
 
 async function addPropertyService(addressBody, propertyBody) {
   await Address.create(addressBody);
@@ -30,7 +32,11 @@ async function listPropertyService(query) {
   const dPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
 
   const properties = await Property.findAndCountAll({
-    include: [{ model: Address, as: 'address', required: true }],
+    include: [
+      { model: Address, as: 'address', required: true },
+      { model: Agent, as: 'agent', required: true },
+      { model: Agency, as: 'agency', required: true },
+    ],
     limit: query.limit || 10,
     offset: query.offset || 0,
     order: [[query.sortBy || 'updatedAt', query.sortOrder || 'DESC']],
