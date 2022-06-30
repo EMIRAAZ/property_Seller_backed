@@ -12,7 +12,9 @@ async function listnewsService(query) {
     limit: query.limit || 10,
     offset: query.offset || 0,
     order: [[query.sortBy || 'updatedAt', query.sortOrder || 'DESC']],
-    where: { topics: { [Op.contains]: [query.topic] } },
+    where: {
+      ...(query.topic ? { topics: { [Op.contains]: [query.topic] } } : {}),
+    },
   });
 
   return news;
