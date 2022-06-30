@@ -34,8 +34,8 @@ async function listPropertyService(query) {
   const properties = await Property.findAndCountAll({
     include: [
       { model: Address, as: 'address', required: true },
-      { model: Agent, as: 'agent', required: true },
-      { model: Agency, as: 'agency', required: true },
+      { model: Agent, as: 'agent', required: false },
+      { model: Agency, as: 'agency', required: false },
     ],
     limit: query.limit || 10,
     offset: query.offset || 0,
