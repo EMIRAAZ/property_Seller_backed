@@ -9,6 +9,7 @@ async function addFamousNeighborhood(req, res) {
   const famousneighborhoodBody = {
     id: generateUniqueID(),
     title: body.title,
+    emirate: body.emirate,
     images: body.images,
   };
 

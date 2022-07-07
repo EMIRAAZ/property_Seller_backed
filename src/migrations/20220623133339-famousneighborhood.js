@@ -12,6 +12,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      emirate: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       images: {
         type: Sequelize.ARRAY(Sequelize.STRING(2000)),
         allowNull: false,
