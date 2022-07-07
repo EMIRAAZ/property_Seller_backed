@@ -155,7 +155,7 @@ async function listPropertyService(query) {
         },
         neighborhood && {
           neighborhood: {
-            [Op.contains]: neighborhood,
+            [Op.contains]: [neighborhood],
           },
         },
         readyToMove && {
