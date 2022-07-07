@@ -27,6 +27,7 @@ async function listPropertyService(query) {
     placeAddress,
     building,
     readyToMove,
+    neighborhood,
   } = query;
 
   const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
@@ -150,6 +151,11 @@ async function listPropertyService(query) {
         dPriceTo && {
           price: {
             [Op.lte]: dPriceTo,
+          },
+        },
+        neighborhood && {
+          neighborhood: {
+            [Op.contains]: neighborhood,
           },
         },
         readyToMove && {
