@@ -17,8 +17,7 @@ async function addPropertyService(addressBody, propertyBody) {
 }
 
 async function listPropertyService(query) {
-  const {
-    location,
+  let {
     propertyType,
     sale,
     priceFrom,
@@ -37,6 +36,23 @@ async function listPropertyService(query) {
   const iNoOfBed = noOfBed ? parseInt(noOfBed) : null;
   const iNoOfBath = noOfBath ? parseInt(noOfBath) : null;
 
+  placeAddress =
+    Array.isArray(placeAddress) && placeAddress.length
+      ? placeAddress
+      : placeAddress
+      ? [placeAddress]
+      : null;
+
+  city = Array.isArray(city) && city.length ? city : city ? [city] : null;
+  building =
+    Array.isArray(building) && building.length
+      ? building
+      : building
+      ? [building]
+      : null;
+
+  console.log(city);
+
   const properties = await Property.findAndCountAll({
     include: [
       { model: Address, as: 'address', required: true },
@@ -48,54 +64,26 @@ async function listPropertyService(query) {
     order: [[query.sortBy || 'updatedAt', query.sortOrder || 'DESC']],
     where: {
       [Op.and]: [
-        location && {
+        (city || placeAddress || building) && {
           [Op.or]: [
-            {
-              placeAddress: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('placeAddress')),
-                'LIKE',
-                `%${location.toLowerCase()}%`
-              ),
-            },
-            {
-              building: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('building')),
-                'LIKE',
-                `%${location.toLowerCase()}%`
-              ),
-            },
-            {
-              city: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('city')),
-                'LIKE',
-                `%${location.toLowerCase()}%`
-              ),
-            },
-          ],
-        },
-        city && {
-          [Op.or]: [
-            placeAddress && {
-              placeAddress: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('placeAddress')),
-                'LIKE',
-                `%${placeAddress.toLowerCase()}%`
-              ),
-            },
-            {
-              city: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('city')),
-                'LIKE',
-                `%${city.toLowerCase()}%`
-              ),
-            },
-            building && {
-              building: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('building')),
-                'LIKE',
-                `%${building.toLowerCase()}%`
-              ),
-            },
+            placeAddress &&
+              placeAddress.length && {
+                placeAddress: {
+                  [Op.or]: renderOptions(placeAddress, 'placeAddress'),
+                },
+              },
+            city &&
+              city.length && {
+                city: {
+                  [Op.or]: renderOptions(city, 'city'),
+                },
+              },
+            building &&
+              building.length && {
+                building: {
+                  [Op.or]: renderOptions(building, 'building'),
+                },
+              },
           ],
         },
         propertyType && {
@@ -185,6 +173,16 @@ async function listPropertyService(query) {
 
   return properties;
 }
+
+const renderOptions = (array = [], key = '') => {
+  return array.map(item => {
+    return sequelize.where(
+      sequelize.fn('LOWER', sequelize.col(key)),
+      'LIKE',
+      `%${item.toLowerCase()}%`
+    );
+  });
+};
 
 async function listPropertyByIdService(id) {
   const property = await Property.findAll({
