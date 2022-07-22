@@ -28,10 +28,14 @@ async function listPropertyService(query) {
     building,
     readyToMove,
     neighborhood,
+    noOfBed,
+    noOfBath,
   } = query;
 
   const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
   const dPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
+  const iNoOfBed = noOfBed ? parseInt(noOfBed) : null;
+  const iNoOfBath = noOfBed ? parseInt(noOfBath) : null;
 
   const properties = await Property.findAndCountAll({
     include: [
@@ -101,6 +105,28 @@ async function listPropertyService(query) {
                 sequelize.fn('LOWER', sequelize.col('propertyType')),
                 'LIKE',
                 `%${propertyType.toLowerCase()}%`
+              ),
+            },
+          ],
+        },
+        iNoOfBath && {
+          [Op.or]: [
+            {
+              noOfBathroom: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('noOfBathroom')),
+                'LIKE',
+                iNoOfBath
+              ),
+            },
+          ],
+        },
+        iNoOfBed && {
+          [Op.or]: [
+            {
+              noOfBedroom: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('noOfBedroom')),
+                'LIKE',
+                iNoOfBed
               ),
             },
           ],
