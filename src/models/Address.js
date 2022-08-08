@@ -21,6 +21,10 @@ const Address = sequelize.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
+    emirate: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
     latitude: {
       type: Sequelize.DECIMAL(10, 8),
       allowNull: true,
