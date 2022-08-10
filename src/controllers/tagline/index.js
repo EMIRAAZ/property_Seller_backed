@@ -9,6 +9,7 @@ async function addtagline(req, res) {
   const taglineBody = {
     id: generateUniqueID(),
     title: body.title,
+    tagheadId: body.tagheadId,
   };
 
   const tagline = await taglineService.addtaglineService(taglineBody);
