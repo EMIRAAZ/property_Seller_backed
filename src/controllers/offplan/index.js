@@ -10,9 +10,10 @@ async function addOffplan(req, res) {
     id: generateUniqueID(),
     placeAddress: body.placeAddress,
     city: body.city,
+    emirate: body.emirate,
+    latitude: body.coordinates.lat,
+    longitude: body.coordinates.lng,
     ...(body.building ? { building: body.building } : {}),
-    ...(body.latitude ? { latitude: body.latitude } : {}),
-    ...(body.longitude ? { longitude: body.longitude } : {}),
   };
 
   const offplanBody = {
