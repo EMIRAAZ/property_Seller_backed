@@ -10,6 +10,7 @@ async function addProperty(req, res) {
     id: generateUniqueID(),
     placeAddress: body.placeAddress,
     city: body.city,
+    emirate: body.emirate,
     latitude: body.coordinates.lat,
     longitude: body.coordinates.lng,
     ...(body.building ? { building: body.building } : {}),
