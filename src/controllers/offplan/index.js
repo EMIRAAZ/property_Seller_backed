@@ -11,8 +11,8 @@ async function addOffplan(req, res) {
     placeAddress: body.placeAddress,
     city: body.city,
     emirate: body.emirate,
-    latitude: body.coordinates.lat,
-    longitude: body.coordinates.lng,
+    ...(body.latitude ? { latitude: body.latitude } : {}),
+    ...(body.longitude ? { longitude: body.longitude } : {}),
     ...(body.building ? { building: body.building } : {}),
   };
 
