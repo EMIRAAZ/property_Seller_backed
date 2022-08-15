@@ -37,7 +37,7 @@ async function loginAgencyService(body) {
 
   const user = {
     _id: agency.id,
-    role: agency.role,
+    role: 'AGENCY',
   };
 
   const token = generateAccessToken(user);
