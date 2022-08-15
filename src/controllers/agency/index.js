@@ -78,7 +78,7 @@ async function deleteAgencyById(req, res) {
 module.exports = {
   listAgency: [verify, authRole(['ADMIN']), listAgency],
   addAgency: [verify, authRole(['ADMIN']), addAgency],
-  loginAgency: [verify, loginAgency],
+  loginAgency: [loginAgency],
   listAgencyById: [verify, authRole(['ADMIN']), listAgencyById],
   updateAgencyById: [verify, authRole(['ADMIN']), updateAgencyById],
   deleteAgencyById: [verify, authRole(['ADMIN']), deleteAgencyById],
