@@ -14,6 +14,8 @@ async function addAgency(req, res) {
   const agencyBody = {
     id: generateUniqueID(),
     agencyName: body.agencyName,
+    username: body.username,
+    password: body.password,
     ...(body.agencyLogo ? { agencyLogo: body.agencyLogo } : {}),
     ...(body.tradeLicenseNo ? { tradeLicenseNo: body.tradeLicenseNo } : {}),
     ...(body.brn ? { brn: body.brn } : {}),
