@@ -150,11 +150,19 @@ async function deletePropertyByAgent(req, res) {
 }
 
 module.exports = {
-  addProperty: [verify, authRole(['ADMIN', 'AGENT']), addProperty],
+  addProperty: [verify, authRole(['ADMIN', 'AGENT', 'AGENCY']), addProperty],
   listProperty: [listProperty],
   listPropertyById: [listPropertyById],
-  updatePropertyById: [verify, authRole(['ADMIN']), updatePropertyById],
-  deletePropertyById: [verify, authRole(['ADMIN']), deletePropertyById],
+  updatePropertyById: [
+    verify,
+    authRole(['ADMIN', 'AGENCY']),
+    updatePropertyById,
+  ],
+  deletePropertyById: [
+    verify,
+    authRole(['ADMIN', 'AGENCY']),
+    deletePropertyById,
+  ],
   listPropertyByAgent: [verify, authRole(['AGENT']), listPropertyByAgent],
   listPropertyByIdByAgent: [
     verify,

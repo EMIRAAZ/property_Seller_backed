@@ -85,11 +85,11 @@ async function listAgentByAgency(req, res) {
 }
 
 module.exports = {
-  registerAgent: [verify, authRole(['ADMIN']), registerAgent],
+  registerAgent: [verify, authRole(['ADMIN', 'AGENCY']), registerAgent],
   loginAgent: [loginAgent],
-  listAgent: [verify, authRole(['ADMIN']), listAgent],
-  listAgentByAgency: [verify, authRole(['ADMIN']), listAgentByAgency],
-  listAgentById: [verify, authRole(['ADMIN']), listAgentById],
-  updateAgentById: [verify, authRole(['ADMIN']), updateAgentById],
-  deleteAgentById: [verify, authRole(['ADMIN']), deleteAgentById],
+  listAgent: [verify, authRole(['ADMIN', 'AGENCY']), listAgent],
+  listAgentByAgency: [verify, authRole(['ADMIN', 'AGENCY']), listAgentByAgency],
+  listAgentById: [verify, authRole(['ADMIN', 'AGENCY']), listAgentById],
+  updateAgentById: [verify, authRole(['ADMIN', 'AGENCY']), updateAgentById],
+  deleteAgentById: [verify, authRole(['ADMIN', 'AGENCY']), deleteAgentById],
 };
