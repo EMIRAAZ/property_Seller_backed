@@ -1,9 +1,23 @@
 const Agency = require('../../models/Agency');
+const createError = require('http-errors');
 const bcrypt = require('bcryptjs');
 const { generateAccessToken } = require('../../utils');
 
 async function addAgencyService(agencyBody) {
-  const agency = await Agency.create(agencyBody);
+  const isExistingAgency = await Agency.findOne({
+    where: {
+      username: agencyBody.username,
+    },
+  });
+  if (isExistingAgency)
+    throw new Error(createError(409, 'Agency already exists', { status: 409 }));
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(agencyBody.password, salt);
+  agencyBody.password = hashedPassword;
+
+  const agency = await Agency.create({ ...agencyBody });
+  agency.password = 'encrypted!';
   return agency;
 }
 
