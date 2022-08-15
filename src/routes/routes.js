@@ -25,6 +25,7 @@ const agencyRoutes = require('../controllers/agency');
 
 router.post('/agency', agencyRoutes.addAgency);
 router.get('/agency', agencyRoutes.listAgency);
+router.post('/login-agency', agencyRoutes.loginAgency);
 router.get('/agency/:id', agencyRoutes.listAgencyById);
 router.patch('/agency/:id', agencyRoutes.updateAgencyById);
 router.delete('/agency/:id', agencyRoutes.deleteAgencyById);
@@ -120,6 +121,7 @@ router.patch('/news/:id', newsRoutes.updatenewsById);
 router.delete('/news/:id', newsRoutes.deletenewsById);
 
 const blogRoutes = require('../controllers/blog');
+const agency = require('../controllers/agency');
 
 router.post('/blog', blogRoutes.addblog);
 router.get('/blog', blogRoutes.listblog);
