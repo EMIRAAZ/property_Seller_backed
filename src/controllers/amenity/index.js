@@ -56,9 +56,13 @@ async function deleteAmenityById(req, res) {
 }
 
 module.exports = {
-  addAmenity: [verify, authRole(['ADMIN', 'AGENT']), addAmenity],
-  listAmenity: [verify, authRole(['ADMIN', 'AGENT']), listAmenity],
-  listAmenityById: [verify, authRole(['ADMIN', 'AGENT']), listAmenityById],
-  updateAmenityById: [verify, authRole(['ADMIN']), updateAmenityById],
-  deleteAmenityById: [verify, authRole(['ADMIN']), deleteAmenityById],
+  addAmenity: [verify, authRole(['ADMIN', 'AGENT', 'AGENCY']), addAmenity],
+  listAmenity: [verify, authRole(['ADMIN', 'AGENT', 'AGENCY']), listAmenity],
+  listAmenityById: [
+    verify,
+    authRole(['ADMIN', 'AGENT', 'AGENCY']),
+    listAmenityById,
+  ],
+  updateAmenityById: [verify, authRole(['ADMIN', 'AGENCY']), updateAmenityById],
+  deleteAmenityById: [verify, authRole(['ADMIN', 'AGENCY']), deleteAmenityById],
 };

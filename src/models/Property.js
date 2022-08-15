@@ -149,6 +149,7 @@ const Property = sequelize.define(
 Property.belongsTo(Agent, {
   foreignKey: 'agentId',
   as: 'agent',
+  allowNull: false,
 });
 
 Property.belongsTo(Address, {
@@ -158,11 +159,13 @@ Property.belongsTo(Address, {
 Property.belongsTo(Agency, {
   foreignKey: 'agencyId',
   as: 'agency',
+  allowNull: true,
 });
 
 Property.belongsTo(TagLine, {
   foreignKey: 'taglineId',
   as: 'tagline',
+  allowNull: true,
 });
 
 module.exports = Property;
