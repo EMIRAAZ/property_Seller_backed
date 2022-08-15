@@ -35,11 +35,12 @@ async function registerAgent(req, res) {
 
 async function loginAgent(req, res) {
   const body = { ...req.body };
-  const token = await agentService.loginAgentService(body);
+  const { token, id } = await agentService.loginAgentService(body);
 
   return res
     .header('auth-token', token)
     .header('role', 'AGENT')
+    .header('agent_id', id)
     .status(200)
     .json({ status: 200, message: 'You are logged in' });
 }

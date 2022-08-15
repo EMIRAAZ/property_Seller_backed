@@ -44,7 +44,7 @@ async function loginAgentService(body) {
   };
 
   const token = generateAccessToken(user);
-  return token;
+  return { token, id: agent.id };
 }
 
 async function listAgentService() {
