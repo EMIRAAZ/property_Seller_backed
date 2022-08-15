@@ -40,7 +40,7 @@ async function loginAgent(req, res) {
   return res
     .header('auth-token', token)
     .header('role', 'AGENT')
-    .header('agent_id', id)
+    .header('id', id)
     .status(200)
     .json({ status: 200, message: 'You are logged in' });
 }
