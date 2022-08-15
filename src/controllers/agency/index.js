@@ -16,6 +16,7 @@ async function addAgency(req, res) {
     agencyName: body.agencyName,
     username: body.username,
     password: body.password,
+    role: 'AGENCY',
     ...(body.agencyLogo ? { agencyLogo: body.agencyLogo } : {}),
     ...(body.tradeLicenseNo ? { tradeLicenseNo: body.tradeLicenseNo } : {}),
     ...(body.brn ? { brn: body.brn } : {}),
