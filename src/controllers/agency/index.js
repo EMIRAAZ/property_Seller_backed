@@ -34,6 +34,17 @@ async function addAgency(req, res) {
   });
 }
 
+async function loginAgency(req, res) {
+  const body = { ...req.body };
+  const token = await agencyService.loginAgencyService(body);
+
+  return res
+    .header('auth-token', token)
+    .header('role', 'ADMIN')
+    .status(200)
+    .json({ status: 200, message: 'You are logged in' });
+}
+
 async function listAgencyById(req, res) {
   const { id } = req.params;
 
@@ -65,6 +76,7 @@ async function deleteAgencyById(req, res) {
 module.exports = {
   listAgency: [verify, authRole(['ADMIN']), listAgency],
   addAgency: [verify, authRole(['ADMIN']), addAgency],
+  loginAgency: [verify, loginAgency],
   listAgencyById: [verify, authRole(['ADMIN']), listAgencyById],
   updateAgencyById: [verify, authRole(['ADMIN']), updateAgencyById],
   deleteAgencyById: [verify, authRole(['ADMIN']), deleteAgencyById],

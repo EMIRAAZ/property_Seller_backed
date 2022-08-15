@@ -8,6 +8,19 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
       },
+      username: {
+        type: Sequelize.STRING,
+        unique: true,
+        allowNull: false,
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      role: {
+        type: Sequelize.STRING,
+        default: 'ADMIN',
+      },
       agencyName: {
         type: Sequelize.STRING,
         allowNull: false,

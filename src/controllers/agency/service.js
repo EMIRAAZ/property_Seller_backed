@@ -1,8 +1,33 @@
 const Agency = require('../../models/Agency');
+const bcrypt = require('bcryptjs');
+const { generateAccessToken } = require('../../utils');
 
 async function addAgencyService(agencyBody) {
   const agency = await Agency.create(agencyBody);
   return agency;
+}
+
+async function loginAgencyService(body) {
+  const credentials = { ...body };
+
+  const agency = await Agency.findOne({
+    where: { username: credentials.username },
+  });
+  if (!agency) throw new Error('username or password is wrong');
+
+  const checkIfPasswordValid = await bcrypt.compare(
+    credentials.password,
+    agency.password
+  );
+  if (!checkIfPasswordValid) throw new Error('Invalid password');
+
+  const user = {
+    _id: agency.id,
+    role: agency.role,
+  };
+
+  const token = generateAccessToken(user);
+  return token;
 }
 
 async function listAgencyService() {
@@ -31,4 +56,5 @@ module.exports = {
   listAgencyByIdService,
   updateAgencyById,
   deleteAgencyById,
+  loginAgencyService,
 };

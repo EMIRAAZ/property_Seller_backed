@@ -9,6 +9,19 @@ const Agency = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
+    username: {
+      type: Sequelize.STRING,
+      unique: true,
+      allowNull: false,
+    },
+    password: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    role: {
+      type: Sequelize.STRING,
+      default: 'AGENCY',
+    },
     agencyName: {
       type: Sequelize.STRING,
       allowNull: false,
