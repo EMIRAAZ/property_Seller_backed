@@ -233,11 +233,9 @@ async function listPropertyServiceByAgent(agentId, query) {
           agentId: agentId,
         },
         verified && {
-          [Op.or]: [
-            {
-              verified: verified == 'true' ? true : false,
-            },
-          ],
+          verified: {
+            [Op.is]: true,
+          },
         },
         location && {
           [Op.or]: [
