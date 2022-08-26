@@ -225,7 +225,6 @@ async function listPropertyServiceByAgent(agentId, query) {
     city,
     placeAddress,
     building,
-    verified,
   } = query;
 
   const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
