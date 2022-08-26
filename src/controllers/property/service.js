@@ -29,6 +29,7 @@ async function listPropertyService(query) {
     neighborhood,
     noOfBed,
     noOfBath,
+    verified,
   } = query;
 
   const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
@@ -85,6 +86,11 @@ async function listPropertyService(query) {
                 },
               },
           ],
+        },
+        verified && {
+          verified: {
+            [Op.is]: true,
+          },
         },
         propertyType && {
           [Op.or]: [
@@ -231,11 +237,6 @@ async function listPropertyServiceByAgent(agentId, query) {
       [Op.and]: [
         {
           agentId: agentId,
-        },
-        verified && {
-          verified: {
-            [Op.is]: true,
-          },
         },
         location && {
           [Op.or]: [
