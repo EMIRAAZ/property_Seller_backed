@@ -219,6 +219,7 @@ async function listPropertyServiceByAgent(agentId, query) {
     city,
     placeAddress,
     building,
+    verified,
   } = query;
 
   const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
@@ -253,6 +254,13 @@ async function listPropertyServiceByAgent(agentId, query) {
                 'LIKE',
                 `%${location}%`
               ),
+            },
+          ],
+        },
+        verified && {
+          [Op.or]: [
+            {
+              verified: verified,
             },
           ],
         },
