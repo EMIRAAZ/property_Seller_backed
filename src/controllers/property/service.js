@@ -30,6 +30,7 @@ async function listPropertyService(query) {
     noOfBed,
     noOfBath,
     verified,
+    tagline,
   } = query;
 
   const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
@@ -172,6 +173,9 @@ async function listPropertyService(query) {
         },
         readyToMove && {
           readyToMove: true,
+        },
+        tagline && {
+          taglineId: tagline,
         },
       ],
     },
