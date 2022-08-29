@@ -387,6 +387,154 @@ async function deletePropertyByAgent(agentId, id) {
   return property;
 }
 
+// list property by agency
+
+async function listPropertyServiceByAgency(agencyId, query) {
+  const {
+    location,
+    propertyType,
+    sale,
+    priceFrom,
+    priceTo,
+    city,
+    placeAddress,
+    building,
+  } = query;
+
+  const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
+  const dPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
+
+  const properties = await Property.findAndCountAll({
+    include: [{ model: Address, as: 'address', required: true }],
+    where: {
+      [Op.and]: [
+        {
+          agencyId: agencyId,
+        },
+        location && {
+          [Op.or]: [
+            {
+              placeAddress: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('placeAddress')),
+                'LIKE',
+                `%${location}%`
+              ),
+            },
+            {
+              building: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('building')),
+                'LIKE',
+                `%${location}%`
+              ),
+            },
+            {
+              city: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('city')),
+                'LIKE',
+                `%${location}%`
+              ),
+            },
+          ],
+        },
+        placeAddress && {
+          [Op.or]: [
+            {
+              placeAddress: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('placeAddress')),
+                'LIKE',
+                `%${placeAddress}%`
+              ),
+            },
+          ],
+        },
+        city && {
+          [Op.or]: [
+            {
+              city: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('city')),
+                'LIKE',
+                `%${city}%`
+              ),
+            },
+          ],
+        },
+        building && {
+          [Op.or]: [
+            {
+              building: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('building')),
+                'LIKE',
+                `%${building}%`
+              ),
+            },
+          ],
+        },
+        propertyType && {
+          [Op.or]: [
+            {
+              propertyType: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('propertyType')),
+                'LIKE',
+                `%${propertyType}%`
+              ),
+            },
+          ],
+        },
+        sale &&
+          sale === 'both' && {
+            [Op.or]: [
+              {
+                for: sequelize.where(
+                  sequelize.fn('LOWER', sequelize.col('for')),
+                  'LIKE',
+                  `%rent%`
+                ),
+              },
+              {
+                for: sequelize.where(
+                  sequelize.fn('LOWER', sequelize.col('for')),
+                  'LIKE',
+                  `%buy%`
+                ),
+              },
+              {
+                for: sequelize.where(
+                  sequelize.fn('LOWER', sequelize.col('for')),
+                  'LIKE',
+                  `%both%`
+                ),
+              },
+            ],
+          },
+        sale &&
+          sale !== 'both' && {
+            [Op.or]: [
+              {
+                for: sequelize.where(
+                  sequelize.fn('LOWER', sequelize.col('for')),
+                  'LIKE',
+                  `%${sale}%`
+                ),
+              },
+            ],
+          },
+        dPriceFrom && {
+          price: {
+            [Op.gte]: dPriceFrom,
+          },
+        },
+        dPriceTo && {
+          price: {
+            [Op.lte]: dPriceTo,
+          },
+        },
+      ],
+    },
+  });
+
+  return properties;
+}
+
 module.exports = {
   addPropertyService,
   listPropertyService,
@@ -397,4 +545,5 @@ module.exports = {
   listPropertyServiceByAgent,
   updatePropertyByAgent,
   deletePropertyByAgent,
+  listPropertyServiceByAgency,
 };

@@ -149,8 +149,25 @@ async function deletePropertyByAgent(req, res) {
   });
 }
 
+//agency property
+
+async function listPropertyByAgency(req, res) {
+  const query = { ...req.query };
+  const agencyId = req.user._id;
+  const properties = await propertyService.listPropertyServiceByAgency(
+    agencyId,
+    query
+  );
+  return res.status(200).json({ status: 200, data: properties });
+}
+
 module.exports = {
   addProperty: [verify, authRole(['ADMIN', 'AGENT', 'AGENCY']), addProperty],
+  listPropertyByAgency: [
+    verify,
+    authRole(['ADMIN', 'AGENT', 'AGENCY']),
+    listPropertyByAgency,
+  ],
   listProperty: [listProperty],
   listPropertyById: [listPropertyById],
   updatePropertyById: [
