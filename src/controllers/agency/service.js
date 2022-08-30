@@ -41,7 +41,7 @@ async function loginAgencyService(body) {
   };
 
   const token = generateAccessToken(user);
-  return token;
+  return {token,id:agency.id};
 }
 
 async function listAgencyService() {
