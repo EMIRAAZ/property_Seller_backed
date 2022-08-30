@@ -33,10 +33,7 @@ async function loginAgencyService(body) {
     credentials.password,
     agency.password
   );
-  if (!checkIfPasswordValid)
-    throw new Error(
-      `Invalid password ${(agency.password, credentials.password)}`
-    );
+  if (!checkIfPasswordValid) throw new Error(`Invalid password `);
 
   const user = {
     _id: agency.id,
@@ -44,7 +41,7 @@ async function loginAgencyService(body) {
   };
 
   const token = generateAccessToken(user);
-  return {token,id:agency.id};
+  return { token, id: agency.id };
 }
 
 async function listAgencyService() {
@@ -58,6 +55,9 @@ async function listAgencyByIdService(id) {
 }
 
 async function updateAgencyById(id, body) {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(body.password, salt);
+  body.password = hashedPassword;
   const agency = await Agency.update({ ...body }, { where: { id: id } });
   return agency;
 }
