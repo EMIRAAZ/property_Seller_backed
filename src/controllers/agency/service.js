@@ -33,7 +33,10 @@ async function loginAgencyService(body) {
     credentials.password,
     agency.password
   );
-  if (!checkIfPasswordValid) throw new Error('Invalid password');
+  if (!checkIfPasswordValid)
+    throw new Error(
+      `Invalid password ${(agency.password, credentials.password)}`
+    );
 
   const user = {
     _id: agency.id,
