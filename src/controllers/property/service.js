@@ -27,6 +27,7 @@ async function listPropertyService(query) {
     building,
     readyToMove,
     neighborhood,
+    amenities,
     noOfBed,
     noOfBath,
     verified,
@@ -52,8 +53,6 @@ async function listPropertyService(query) {
       : building
       ? [building]
       : null;
-
-  console.log(city);
 
   const properties = await Property.findAndCountAll({
     include: [
@@ -169,6 +168,11 @@ async function listPropertyService(query) {
         neighborhood && {
           neighborhood: {
             [Op.contains]: [neighborhood],
+          },
+        },
+        amenities && {
+          amenities: {
+            [Op.contains]: [amenities],
           },
         },
         readyToMove && {
