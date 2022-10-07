@@ -13,12 +13,8 @@ const News = sequelize.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    mainTitle: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
     description: {
-      type: Sequelize.STRING(2000),
+      type: Sequelize.STRING(50000),
       allowNull: false,
     },
     images: {
