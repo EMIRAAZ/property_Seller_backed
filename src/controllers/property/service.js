@@ -33,17 +33,6 @@ async function listPropertyService(query) {
     location,
   } = query;
 
-  console.log('working');
-  console.log('working');
-  console.log('working');
-  console.log('working');
-  console.log('working');
-  console.log(query);
-  console.log('working');
-  console.log('working');
-  console.log('working');
-  console.log('working');
-
   const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
   const dPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
   const iNoOfBed = noOfBed ? parseInt(noOfBed) : null;
@@ -60,7 +49,7 @@ async function listPropertyService(query) {
     order: [[query.sortBy || 'updatedAt', query.sortOrder || 'DESC']],
     where: {
       [Op.and]: [
-        {
+        location && {
           [Op.or]: [
             location &&
               location.length && {
