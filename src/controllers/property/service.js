@@ -22,9 +22,6 @@ async function listPropertyService(query) {
     sale,
     priceFrom,
     priceTo,
-    city,
-    placeAddress,
-    building,
     readyToMove,
     neighborhood,
     amenities,
@@ -32,27 +29,25 @@ async function listPropertyService(query) {
     noOfBath,
     verified,
     tagline,
+    emirate,
+    location,
   } = query;
+
+  console.log('working');
+  console.log('working');
+  console.log('working');
+  console.log('working');
+  console.log('working');
+  console.log(query);
+  console.log('working');
+  console.log('working');
+  console.log('working');
+  console.log('working');
 
   const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
   const dPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
   const iNoOfBed = noOfBed ? parseInt(noOfBed) : null;
   const iNoOfBath = noOfBath ? parseInt(noOfBath) : null;
-
-  placeAddress =
-    Array.isArray(placeAddress) && placeAddress.length
-      ? placeAddress
-      : placeAddress
-      ? [placeAddress]
-      : null;
-
-  city = Array.isArray(city) && city.length ? city : city ? [city] : null;
-  building =
-    Array.isArray(building) && building.length
-      ? building
-      : building
-      ? [building]
-      : null;
 
   const properties = await Property.findAndCountAll({
     include: [
@@ -65,24 +60,24 @@ async function listPropertyService(query) {
     order: [[query.sortBy || 'updatedAt', query.sortOrder || 'DESC']],
     where: {
       [Op.and]: [
-        (city || placeAddress || building) && {
+        {
           [Op.or]: [
-            placeAddress &&
-              placeAddress.length && {
+            location &&
+              location.length && {
                 placeAddress: {
-                  [Op.or]: renderOptions(placeAddress, 'placeAddress'),
+                  [Op.or]: renderOptions(location, 'placeAddress'),
                 },
               },
-            city &&
-              city.length && {
+            location &&
+              location.length && {
                 city: {
-                  [Op.or]: renderOptions(city, 'city'),
+                  [Op.or]: renderOptions(location, 'city'),
                 },
               },
-            building &&
-              building.length && {
+            location &&
+              location.length && {
                 building: {
-                  [Op.or]: renderOptions(building, 'building'),
+                  [Op.or]: renderOptions(location, 'building'),
                 },
               },
           ],
@@ -99,6 +94,17 @@ async function listPropertyService(query) {
                 sequelize.fn('LOWER', sequelize.col('propertyType')),
                 'LIKE',
                 `%${propertyType.toLowerCase()}%`
+              ),
+            },
+          ],
+        },
+        emirate && {
+          [Op.or]: [
+            {
+              emirate: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('emirate')),
+                'LIKE',
+                `%${emirate.toLowerCase()}%`
               ),
             },
           ],
@@ -189,13 +195,23 @@ async function listPropertyService(query) {
 }
 
 const renderOptions = (array = [], key = '') => {
-  return array.map(item => {
-    return sequelize.where(
-      sequelize.fn('LOWER', sequelize.col(key)),
-      'LIKE',
-      `%${item.toLowerCase()}%`
-    );
-  });
+  if (Array.isArray(array)) {
+    return array.map(item => {
+      return sequelize.where(
+        sequelize.fn('LOWER', sequelize.col(key)),
+        'LIKE',
+        `%${item.toLowerCase()}%`
+      );
+    });
+  } else {
+    return [array].map(item => {
+      return sequelize.where(
+        sequelize.fn('LOWER', sequelize.col(key)),
+        'LIKE',
+        `%${item.toLowerCase()}%`
+      );
+    });
+  }
 };
 
 async function listPropertyByIdService(id) {
