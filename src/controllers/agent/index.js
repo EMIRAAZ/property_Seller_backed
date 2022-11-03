@@ -82,7 +82,7 @@ async function listAgentByAgency(req, res) {
   const { id } = req.params;
 
   const agent = await agentService.listAgentByAgencyService(id);
-  return res.status(200).json({ status: 200, data: [agent] });
+  return res.status(200).json({ status: 200, data: agent });
 }
 
 module.exports = {

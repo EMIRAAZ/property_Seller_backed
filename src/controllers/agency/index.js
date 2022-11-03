@@ -39,13 +39,22 @@ async function addAgency(req, res) {
 
 async function loginAgency(req, res) {
   const body = { ...req.body };
-  const {token,id} = await agencyService.loginAgencyService(body);
+  const { token, id, agencyName, photo, email } =
+    await agencyService.loginAgencyService(body);
 
   return res
     .header('auth-token', token)
     .header('role', 'AGENCY')
-    .header('agency_id',id).status(200)
-    .json({ status: 200, message: 'You are logged in',id:id });
+    .header('agency_id', id)
+    .status(200)
+    .json({
+      status: 200,
+      message: 'You are logged in',
+      id: id,
+      agencyName,
+      photo,
+      email,
+    });
 }
 
 async function listAgencyById(req, res) {

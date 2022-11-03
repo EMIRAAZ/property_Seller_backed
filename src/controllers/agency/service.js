@@ -41,7 +41,13 @@ async function loginAgencyService(body) {
   };
 
   const token = generateAccessToken(user);
-  return { token, id: agency.id };
+  return {
+    token,
+    id: agency.id,
+    agencyName: agency.agencyName,
+    photo: agency.agencyLogo,
+    email: agency.email,
+  };
 }
 
 async function listAgencyService() {
