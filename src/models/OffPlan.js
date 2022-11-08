@@ -32,10 +32,6 @@ const OffPlan = sequelize.define(
       type: Sequelize.ARRAY(Sequelize.STRING(500)),
       allowNull: true,
     },
-    emirate: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
     email: {
       type: Sequelize.STRING,
       allowNull: false,
