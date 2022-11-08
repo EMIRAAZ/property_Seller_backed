@@ -20,7 +20,11 @@ const OffPlan = sequelize.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    description: {
+    projectOverview: {
+      type: Sequelize.STRING(50000),
+      allowNull: false,
+    },
+    interiorDetails: {
       type: Sequelize.STRING(50000),
       allowNull: false,
     },
@@ -73,6 +77,10 @@ const OffPlan = sequelize.define(
       allowNull: true,
     },
     paymentPlan: {
+      type: Sequelize.ARRAY(Sequelize.JSON),
+      allowNull: true,
+    },
+    whyThisProperty: {
       type: Sequelize.ARRAY(Sequelize.JSON),
       allowNull: true,
     },

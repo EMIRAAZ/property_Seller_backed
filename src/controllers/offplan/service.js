@@ -2,6 +2,7 @@ const { Op } = require('sequelize');
 const sequelize = require('../../database/dbConnection');
 const OffPlan = require('../../models/OffPlan');
 const Address = require('../../models/Address');
+const Agent = require('../../models/Agent');
 
 async function addOffplanService(addressBody, offplanBody) {
   await Address.create(addressBody);
@@ -15,36 +16,36 @@ async function addOffplanService(addressBody, offplanBody) {
 }
 
 async function listOffplanService(query) {
-  const { city, placeAddress, building } = query;
+  const { emirate, propertyType } = query;
 
   const properties = await OffPlan.findAndCountAll({
-    include: [{ model: Address, as: 'address', required: true }],
+    include: [
+      { model: Address, as: 'address', required: true },
+      { model: Agent, as: 'agent', required: false },
+    ],
     limit: query.limit || 10,
     offset: query.offset || 0,
     order: [[query.sortBy || 'updatedAt', query.sortOrder || 'DESC']],
     where: {
       [Op.and]: [
-        city && {
+        emirate && {
           [Op.or]: [
-            placeAddress && {
-              placeAddress: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('placeAddress')),
-                'LIKE',
-                `%${placeAddress.toLowerCase()}%`
-              ),
-            },
             {
-              city: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('city')),
+              emirate: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('emirate')),
                 'LIKE',
-                `%${city.toLowerCase()}%`
+                `%${emirate.toLowerCase()}%`
               ),
             },
-            building && {
-              building: sequelize.where(
-                sequelize.fn('LOWER', sequelize.col('building')),
+          ],
+        },
+        propertyType && {
+          [Op.or]: [
+            {
+              propertyType: sequelize.where(
+                sequelize.fn('LOWER', sequelize.col('propertyType')),
                 'LIKE',
-                `%${building.toLowerCase()}%`
+                `%${propertyType.toLowerCase()}%`
               ),
             },
           ],
@@ -58,7 +59,10 @@ async function listOffplanService(query) {
 
 async function listOffplanByIdService(id) {
   const offplan = await OffPlan.findAll({
-    include: [{ model: Address, as: 'address', required: true }],
+    include: [
+      { model: Address, as: 'address', required: true },
+      { model: Agent, as: 'agent', required: false },
+    ],
     where: { id: id },
   });
   return offplan;

@@ -19,13 +19,27 @@ async function addOffplan(req, res) {
   const offplanBody = {
     id: generateUniqueID(),
     title: body.title,
-    description: body.description,
+    projectName: body.projectName,
+    projectOverview: body.projectOverview,
+    interiorDetails: body.interiorDetails,
     images: body.images,
     agentId: body.agentId,
-    ...(body.availability ? { availability: body.availability } : {}),
+    price: body.price,
+    propertyType: body.propertyType,
+    propertySize: body.propertySize,
+    propertySizeUnit: body.propertySizeUnit,
+    noOfBedroom: body.noOfBedroom,
+    noOfBathroom: body.noOfBathroom,
+    phone: body.phone,
+    email: body.email,
+    videoLink: body.videoLink,
+    whatsapp: body.whatsapp,
+    ...(body.priceForAvailability
+      ? { priceForAvailability: body.priceForAvailability }
+      : {}),
     ...(body.amenities ? { amenities: body.amenities } : {}),
     ...(body.paymentPlan ? { paymentPlan: body.paymentPlan } : {}),
-    ...(body.brochurePDF ? { brochurePDF: body.brochurePDF } : {}),
+    ...(body.whyThisProperty ? { whyThisProperty: body.whyThisProperty } : {}),
   };
 
   const offplan = await offplanService.addOffplanService(
