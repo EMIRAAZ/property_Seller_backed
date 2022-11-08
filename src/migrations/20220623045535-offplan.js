@@ -30,23 +30,11 @@ module.exports = {
       },
       price: {
         type: Sequelize.ARRAY(Sequelize.STRING(500)),
-        allowNull: true,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      phone: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      whatsapp: {
-        type: Sequelize.STRING,
         allowNull: false,
       },
       videoLink: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       propertyType: {
         type: Sequelize.STRING,

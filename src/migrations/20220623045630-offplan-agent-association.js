@@ -16,7 +16,8 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     return queryInterface.removeColumn(
       'offplan',
-      'agentId' // key we want to remove
+      'agentId'
+      // key we want to remove
     );
   },
 };

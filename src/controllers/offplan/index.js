@@ -30,14 +30,10 @@ async function addOffplan(req, res) {
     propertySizeUnit: body.propertySizeUnit,
     noOfBedroom: body.noOfBedroom,
     noOfBathroom: body.noOfBathroom,
-    phone: body.phone,
-    email: body.email,
-    videoLink: body.videoLink,
-    whatsapp: body.whatsapp,
+    ...(body.videoLink ? { videoLink: body.videoLink } : {}),
     ...(body.priceForAvailability
       ? { priceForAvailability: body.priceForAvailability }
       : {}),
-    ...(body.amenities ? { amenities: body.amenities } : {}),
     ...(body.paymentPlan ? { paymentPlan: body.paymentPlan } : {}),
     ...(body.whyThisProperty ? { whyThisProperty: body.whyThisProperty } : {}),
   };
