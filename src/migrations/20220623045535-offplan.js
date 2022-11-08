@@ -12,29 +12,68 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      projectName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       description: {
-        type: Sequelize.STRING(2000),
+        type: Sequelize.STRING(50000),
         allowNull: false,
       },
       images: {
         type: Sequelize.ARRAY(Sequelize.STRING(2000)),
         allowNull: false,
       },
-      amenities: {
-        type: Sequelize.ARRAY(Sequelize.STRING(1000)),
+      price: {
+        type: Sequelize.ARRAY(Sequelize.STRING(500)),
         allowNull: true,
       },
-      availability: {
-        //[{noOfBedroom:4,type:"apartment",floorPlan:""}]
+      emirate: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      phone: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      whatsapp: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      videoLink: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      propertyType: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      propertySize: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+      propertySizeUnit: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      noOfBedroom: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      noOfBathroom: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      priceForAvailability: {
         type: Sequelize.ARRAY(Sequelize.JSON),
         allowNull: true,
       },
       paymentPlan: {
-        type: Sequelize.ARRAY(Sequelize.STRING(200)),
-        allowNull: true,
-      },
-      brochurePDF: {
-        type: Sequelize.STRING(2000),
+        type: Sequelize.ARRAY(Sequelize.JSON),
         allowNull: true,
       },
       createdAt: Sequelize.DATE,
