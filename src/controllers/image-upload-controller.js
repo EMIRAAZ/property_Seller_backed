@@ -1,3 +1,5 @@
+var fs = require('fs');
+
 async function uploadImage(req, res) {
   const { file } = req;
 
@@ -14,6 +16,34 @@ async function uploadImage(req, res) {
   });
 }
 
+async function deleteImage(req, res) {
+  const { id } = req.params;
+  console.log(id);
+
+  fs.stat(`./uploads/${id}`, function (err, stats) {
+    console.log(stats);
+
+    if (err) {
+      return res.status(400).send({
+        message: 'No file exist',
+      });
+    }
+
+    fs.unlink(`./uploads/${id}`, function (err) {
+      if (err) {
+        return res.status(400).send({
+          message: 'Cannot do the operation',
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        message: 'Successfully deleted Image',
+      });
+    });
+  });
+}
+
 module.exports = {
   uploadImage: [uploadImage],
+  deleteImage: [deleteImage],
 };
