@@ -122,12 +122,20 @@ router.patch('/news/:id', newsRoutes.updatenewsById);
 router.delete('/news/:id', newsRoutes.deletenewsById);
 
 const blogRoutes = require('../controllers/blog');
-const agency = require('../controllers/agency');
 
 router.post('/blog', blogRoutes.addblog);
 router.get('/blog', blogRoutes.listblog);
 router.get('/blog/:id', blogRoutes.listblogById);
 router.patch('/blog/:id', blogRoutes.updateblogById);
 router.delete('/blog/:id', blogRoutes.deleteblogById);
+
+const cityRoutes = require('../controllers/city');
+
+router.post('/city', cityRoutes.addCity);
+router.get('/city/emirate', cityRoutes.listCityByEmirate);
+router.get('/city', cityRoutes.listCity);
+router.get('/city/:id', cityRoutes.listCityById);
+router.patch('/city/:id', cityRoutes.updateCity);
+router.delete('/city/:id', cityRoutes.deleteCity);
 
 module.exports = router;
