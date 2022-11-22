@@ -7,7 +7,7 @@ async function addCityService(cityBody) {
 }
 
 async function listCityService() {
-  const citys = await City.findAndCountAll();
+  const citys = await City.findAll();
   return citys;
 }
 
@@ -16,7 +16,7 @@ async function listCityByIdService(id) {
   return city;
 }
 async function listCityByEmirate(emirate) {
-  const city = await City.findOne({
+  const city = await City.findAll({
     where: {
       emirate: {
         [Op.like]: '%' + emirate + '%',
