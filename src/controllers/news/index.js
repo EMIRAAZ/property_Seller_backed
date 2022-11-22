@@ -9,9 +9,8 @@ async function addnews(req, res) {
   const newsBody = {
     id: generateUniqueID(),
     title: body.title,
-    mainTitle: body.mainTitle,
     description: body.description,
-    images: body.images,
+    image: body.image,
     topics: body.topics,
   };
 
