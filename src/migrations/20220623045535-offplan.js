@@ -68,6 +68,10 @@ module.exports = {
         type: Sequelize.ARRAY(Sequelize.JSON),
         allowNull: true,
       },
+      amenities: {
+        type: Sequelize.ARRAY(Sequelize.STRING(1000)),
+        allowNull: true,
+      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });

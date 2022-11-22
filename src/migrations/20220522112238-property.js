@@ -131,6 +131,11 @@ module.exports = {
         allowNull: false,
         default: false,
       },
+      offplan: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+        default: false,
+      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });

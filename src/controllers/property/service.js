@@ -28,6 +28,7 @@ async function listPropertyService(query) {
     noOfBed,
     noOfBath,
     verified,
+    offplan,
     tagline,
     emirate,
     location,
@@ -73,6 +74,11 @@ async function listPropertyService(query) {
         },
         verified && {
           verified: {
+            [Op.is]: true,
+          },
+        },
+        offplan && {
+          offplan: {
             [Op.is]: true,
           },
         },

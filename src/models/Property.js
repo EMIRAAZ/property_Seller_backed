@@ -112,6 +112,11 @@ const Property = sequelize.define(
       allowNull: false,
       default: false,
     },
+    offplan: {
+      type: Sequelize.BOOLEAN,
+      allowNull: true,
+      default: false,
+    },
     for: {
       type: Sequelize.STRING,
       allowNull: false,
