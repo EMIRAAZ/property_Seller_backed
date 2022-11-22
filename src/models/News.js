@@ -17,8 +17,8 @@ const News = sequelize.define(
       type: Sequelize.STRING(50000),
       allowNull: false,
     },
-    images: {
-      type: Sequelize.ARRAY(Sequelize.STRING(2000)),
+    image: {
+      type: Sequelize.STRING(50000),
       allowNull: false,
     },
     topics: {
