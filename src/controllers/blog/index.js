@@ -9,9 +9,8 @@ async function addblog(req, res) {
   const blogBody = {
     id: generateUniqueID(),
     title: body.title,
-    mainTitle: body.mainTitle,
     description: body.description,
-    images: body.images,
+    image: body.image,
   };
 
   const blog = await blogService.addblogService(blogBody);
