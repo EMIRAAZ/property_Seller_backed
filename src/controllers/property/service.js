@@ -19,7 +19,6 @@ async function addPropertyService(addressBody, propertyBody) {
 async function listPropertyService(query) {
   let {
     propertyType,
-    sale,
     priceFrom,
     priceTo,
     readyToMove,
@@ -118,44 +117,6 @@ async function listPropertyService(query) {
             },
           ],
         },
-        sale &&
-          sale === 'both' && {
-            [Op.or]: [
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%rent%`
-                ),
-              },
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%buy%`
-                ),
-              },
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%both%`
-                ),
-              },
-            ],
-          },
-        sale &&
-          sale !== 'both' && {
-            [Op.or]: [
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%${sale.toLowerCase()}%`
-                ),
-              },
-            ],
-          },
         dPriceFrom && {
           price: {
             [Op.gte]: dPriceFrom,
@@ -238,7 +199,6 @@ async function listPropertyServiceByAgent(agentId, query) {
   const {
     location,
     propertyType,
-    sale,
     priceFrom,
     priceTo,
     city,
@@ -325,44 +285,6 @@ async function listPropertyServiceByAgent(agentId, query) {
             },
           ],
         },
-        sale &&
-          sale === 'both' && {
-            [Op.or]: [
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%rent%`
-                ),
-              },
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%buy%`
-                ),
-              },
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%both%`
-                ),
-              },
-            ],
-          },
-        sale &&
-          sale !== 'both' && {
-            [Op.or]: [
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%${sale}%`
-                ),
-              },
-            ],
-          },
         dPriceFrom && {
           price: {
             [Op.gte]: dPriceFrom,
@@ -408,7 +330,6 @@ async function listPropertyServiceByAgency(agencyId, query) {
   const {
     location,
     propertyType,
-    sale,
     priceFrom,
     priceTo,
     city,
@@ -495,44 +416,6 @@ async function listPropertyServiceByAgency(agencyId, query) {
             },
           ],
         },
-        sale &&
-          sale === 'both' && {
-            [Op.or]: [
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%rent%`
-                ),
-              },
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%buy%`
-                ),
-              },
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%both%`
-                ),
-              },
-            ],
-          },
-        sale &&
-          sale !== 'both' && {
-            [Op.or]: [
-              {
-                for: sequelize.where(
-                  sequelize.fn('LOWER', sequelize.col('for')),
-                  'LIKE',
-                  `%${sale}%`
-                ),
-              },
-            ],
-          },
         dPriceFrom && {
           price: {
             [Op.gte]: dPriceFrom,

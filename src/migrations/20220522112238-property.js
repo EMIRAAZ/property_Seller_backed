@@ -106,11 +106,6 @@ module.exports = {
         allowNull: false,
         default: false,
       },
-      for: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        default: 'both',
-      },
       noOfShare: {
         type: Sequelize.INTEGER,
         allowNull: true,

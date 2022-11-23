@@ -38,7 +38,6 @@ async function addProperty(req, res) {
     offplan: body.offplan,
     readyToMove: body.readyToMove,
     referenceNo: generateUniqueID(),
-    for: body.for,
     ...(body.noOfShare ? { noOfShare: body.noOfShare } : {}),
     ...(body.noOfReport ? { noOfReport: body.noOfReport } : {}),
     agentId: body.agentId,

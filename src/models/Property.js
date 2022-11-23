@@ -117,11 +117,6 @@ const Property = sequelize.define(
       allowNull: true,
       default: false,
     },
-    for: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      default: 'both',
-    },
     noOfShare: {
       type: Sequelize.INTEGER,
       allowNull: true,
