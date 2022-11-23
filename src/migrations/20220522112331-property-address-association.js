@@ -14,9 +14,9 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.removeColumn(
-      'property',
-      'addressId' // key we want to remove
-    );
+    // return queryInterface.removeColumn(
+    //   'property',
+    //   'addressId' // key we want to remove
+    // );
   },
 };
