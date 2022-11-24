@@ -21,10 +21,10 @@ const News = sequelize.define(
       type: Sequelize.STRING(50000),
       allowNull: false,
     },
-    topics: {
-      type: Sequelize.ARRAY(Sequelize.STRING(1000)),
-      allowNull: true,
-    },
+    // topics: {
+    //   type: Sequelize.ARRAY(Sequelize.STRING(1000)),
+    //   allowNull: true,
+    // },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   },

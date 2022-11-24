@@ -11,7 +11,6 @@ async function addnews(req, res) {
     title: body.title,
     description: body.description,
     image: body.image,
-    topics: body.topics,
   };
 
   const news = await newsService.addnewsService(newsBody);
