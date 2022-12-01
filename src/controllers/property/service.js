@@ -72,14 +72,10 @@ async function listPropertyService(query) {
           ],
         },
         verified && {
-          verified: {
-            [Op.is]: true,
-          },
+          verified: verified,
         },
         offplan && {
-          offplan: {
-            [Op.is]: true,
-          },
+          offplan: offplan,
         },
         propertyType && {
           [Op.or]: [
@@ -138,7 +134,7 @@ async function listPropertyService(query) {
           },
         },
         readyToMove && {
-          readyToMove: true,
+          readyToMove: readyToMove,
         },
         tagline && {
           taglineId: tagline,
