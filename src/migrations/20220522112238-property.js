@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
       },
       price: {
-        type: Sequelize.DECIMAL(15, 2),
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
       videoView: {
@@ -130,6 +130,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: true,
         default: false,
+      },
+      tagline: {
+        type: Sequelize.ARRAY(Sequelize.STRING(1000)),
+        allowNull: true,
       },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,

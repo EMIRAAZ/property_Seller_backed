@@ -4,7 +4,6 @@ const sequelize = require('../database/dbConnection');
 const Agent = require('./Agent');
 const Agency = require('./Agency');
 const Address = require('./Address');
-const TagLine = require('./TagLine');
 
 const Property = sequelize.define(
   'property',
@@ -31,7 +30,7 @@ const Property = sequelize.define(
       allowNull: false,
     },
     price: {
-      type: Sequelize.DECIMAL(15, 2),
+      type: Sequelize.INTEGER,
       allowNull: false,
     },
     videoView: {
@@ -137,7 +136,10 @@ const Property = sequelize.define(
       allowNull: false,
       default: false,
     },
-
+    tagline: {
+      type: Sequelize.ARRAY(Sequelize.STRING(1000)),
+      allowNull: true,
+    },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   },
@@ -159,12 +161,6 @@ Property.belongsTo(Address, {
 Property.belongsTo(Agency, {
   foreignKey: 'agencyId',
   as: 'agency',
-  allowNull: true,
-});
-
-Property.belongsTo(TagLine, {
-  foreignKey: 'taglineId',
-  as: 'tagline',
   allowNull: true,
 });
 

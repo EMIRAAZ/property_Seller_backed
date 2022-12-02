@@ -33,8 +33,8 @@ async function listPropertyService(query) {
     location,
   } = query;
 
-  const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
-  const dPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
+  const iPriceTo = priceTo ? parseInt(priceTo) : null;
+  const iPriceFrom = priceFrom ? parseInt(priceFrom) : null;
   const iNoOfBed = noOfBed ? parseInt(noOfBed) : null;
   const iNoOfBath = noOfBath ? parseInt(noOfBath) : null;
 
@@ -67,6 +67,12 @@ async function listPropertyService(query) {
               location.length && {
                 building: {
                   [Op.or]: renderOptions(location, 'building'),
+                },
+              },
+            location &&
+              location.length && {
+                building: {
+                  [Op.or]: renderOptions(location, 'emirate'),
                 },
               },
           ],
@@ -113,14 +119,14 @@ async function listPropertyService(query) {
             },
           ],
         },
-        dPriceFrom && {
+        iPriceFrom && {
           price: {
-            [Op.gte]: dPriceFrom,
+            [Op.gte]: iPriceFrom,
           },
         },
-        dPriceTo && {
+        iPriceTo && {
           price: {
-            [Op.lte]: dPriceTo,
+            [Op.lte]: iPriceTo,
           },
         },
         neighborhood && {
@@ -137,7 +143,9 @@ async function listPropertyService(query) {
           readyToMove: readyToMove,
         },
         tagline && {
-          taglineId: tagline,
+          tagline: {
+            [Op.contains]: [tagline],
+          },
         },
       ],
     },
@@ -202,8 +210,8 @@ async function listPropertyServiceByAgent(agentId, query) {
     building,
   } = query;
 
-  const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
-  const dPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
+  const iPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
+  const iPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
 
   const properties = await Property.findAndCountAll({
     include: [{ model: Address, as: 'address', required: true }],
@@ -281,14 +289,14 @@ async function listPropertyServiceByAgent(agentId, query) {
             },
           ],
         },
-        dPriceFrom && {
+        iPriceFrom && {
           price: {
-            [Op.gte]: dPriceFrom,
+            [Op.gte]: iPriceFrom,
           },
         },
-        dPriceTo && {
+        iPriceTo && {
           price: {
-            [Op.lte]: dPriceTo,
+            [Op.lte]: iPriceTo,
           },
         },
       ],
@@ -333,8 +341,8 @@ async function listPropertyServiceByAgency(agencyId, query) {
     building,
   } = query;
 
-  const dPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
-  const dPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
+  const iPriceTo = priceTo ? parseFloat(priceTo).toFixed(2) : null;
+  const iPriceFrom = priceFrom ? parseFloat(priceFrom).toFixed(2) : null;
 
   const properties = await Property.findAndCountAll({
     include: [{ model: Address, as: 'address', required: true }],
@@ -412,14 +420,14 @@ async function listPropertyServiceByAgency(agencyId, query) {
             },
           ],
         },
-        dPriceFrom && {
+        iPriceFrom && {
           price: {
-            [Op.gte]: dPriceFrom,
+            [Op.gte]: iPriceFrom,
           },
         },
-        dPriceTo && {
+        iPriceTo && {
           price: {
-            [Op.lte]: dPriceTo,
+            [Op.lte]: iPriceTo,
           },
         },
       ],
