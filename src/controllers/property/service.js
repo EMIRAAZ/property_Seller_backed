@@ -31,6 +31,7 @@ async function listPropertyService(query) {
     tagline,
     emirate,
     location,
+    referenceNo,
   } = query;
 
   const iPriceTo = priceTo ? parseInt(priceTo) : null;
@@ -109,6 +110,13 @@ async function listPropertyService(query) {
           [Op.or]: [
             {
               noOfBathroom: iNoOfBath,
+            },
+          ],
+        },
+        referenceNo && {
+          [Op.or]: [
+            {
+              referenceNo: referenceNo,
             },
           ],
         },
