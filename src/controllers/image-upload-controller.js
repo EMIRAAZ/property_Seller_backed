@@ -7,7 +7,7 @@ async function uploadImage(req, res) {
 
   if (process.env.NODE_ENV === 'development') {
     downloadURL = `${'127.0.0.1:3000'}/${file.path}`;
-  } else downloadURL = `${'https://api.uaeassistant.com'}/${file.path}`;
+  } else downloadURL = `${'http://54.163.214.5'}/${file.path}`;
 
   return res.status(201).json({
     status: 201,
