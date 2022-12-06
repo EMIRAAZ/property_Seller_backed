@@ -1,13 +1,25 @@
 var fs = require('fs');
+var sharp = require('sharp');
+const path = require('path');
 
 async function uploadImage(req, res) {
   const { file } = req;
 
+  const { filename: image } = req.file;
+
+  await sharp(req.file.path)
+    .resize({ height: 1000 })
+    .webp({ quality: 60 })
+    .toFile(path.resolve(req.file.destination, 'processed', image));
+  fs.unlinkSync(req.file.path);
+
   let downloadURL;
+  console.log(file);
 
   if (process.env.NODE_ENV === 'development') {
-    downloadURL = `${'127.0.0.1:3000'}/${file.path}`;
-  } else downloadURL = `${'http://54.163.214.5'}/${file.path}`;
+    downloadURL = `${'127.0.0.1:3001'}/uploads/processed/${file.filename}`;
+  } else
+    downloadURL = `${'http://54.163.214.5'}/uploads/processed/${file.filename}`;
 
   return res.status(201).json({
     status: 201,
