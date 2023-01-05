@@ -36,6 +36,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      propertyCategory: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       propertySize: {
         type: Sequelize.FLOAT,
         allowNull: false,

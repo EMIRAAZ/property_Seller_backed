@@ -138,4 +138,9 @@ router.get('/city/:id', cityRoutes.listCityById);
 router.patch('/city/:id', cityRoutes.updateCity);
 router.delete('/city/:id', cityRoutes.deleteCity);
 
+const advertiseClientRoutes = require('../controllers/advertiseclient');
+
+router.post('/advertise-with-us', advertiseClientRoutes.addadvertiseClient);
+router.get('/advertise-with-us', advertiseClientRoutes.listadvertiseClient);
+
 module.exports = router;

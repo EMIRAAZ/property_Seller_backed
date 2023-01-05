@@ -24,6 +24,7 @@ async function addProperty(req, res) {
     images: body.images,
     price: body.price,
     propertyType: body.propertyType,
+    propertyCategory: body.propertyCategory,
     propertySize: body.propertySize,
     propertySizeUnit: body.propertySizeUnit,
     propertyAge: body.propertyAge,
