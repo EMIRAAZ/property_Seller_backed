@@ -63,6 +63,9 @@ async function listAgentByAgencyService(agencyId) {
 }
 
 async function updateAgentById(id, body) {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(body.password, salt);
+  body.password = hashedPassword;
   const agent = await Agent.update({ ...body }, { where: { id: id } });
   return agent;
 }
