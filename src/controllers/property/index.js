@@ -11,8 +11,9 @@ async function addProperty(req, res) {
     placeAddress: body.placeAddress,
     city: body.city,
     emirate: body.emirate,
-    latitude: body.coordinates.lat,
-    longitude: body.coordinates.lng,
+    locationLinkOfGoogleMap:body.locationLinkOfGoogleMap,
+    // latitude: body.coordinates.lat,
+    // longitude: body.coordinates.lng,
     ...(body.building ? { building: body.building } : {}),
   };
 

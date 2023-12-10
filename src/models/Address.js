@@ -33,6 +33,11 @@ const Address = sequelize.define(
       type: Sequelize.DECIMAL(11, 8),
       allowNull: true,
     },
+    locationLinkOfGoogleMap: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   },
