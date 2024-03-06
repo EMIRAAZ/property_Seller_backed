@@ -18,7 +18,7 @@ app.use(cors({ exposedHeaders: ['auth-token', 'role'] }));
 require('./database/dbConnection');
 
 // routes
-app.use(router);
+app.use('/api',router);
 
 app.use('/', (req, res) => {
   res.send('welcome to uaeassistant');
