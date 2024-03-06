@@ -175,13 +175,13 @@ Property.belongsTo(Agency, {
 });
 
 
-sequelize.sync()
-  .then(() => {
-    console.log('Database and tables synced');
-  })
-  .catch((error) => {
-    console.error('Error syncing database:', error);
-  });
+// sequelize.sync()
+//   .then(() => {
+//     console.log('Database and tables synced');
+//   })
+//   .catch((error) => {
+//     console.error('Error syncing database:', error);
+//   });
 
 
 // Property.sync({force:true})
