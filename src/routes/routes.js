@@ -9,6 +9,7 @@ router.post('/location', locationRoutes.searchLocation);
 // property
 const propertyRoutes = require('../controllers/property');
 
+router.get('/property/getall', propertyRoutes.getall);
 router.post('/property', propertyRoutes.addProperty);
 router.get('/property', propertyRoutes.listProperty);
 router.get('/property/:id', propertyRoutes.listPropertyById);

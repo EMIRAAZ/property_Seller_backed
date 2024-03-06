@@ -17,10 +17,10 @@ const Property = sequelize.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    mainTitle: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
+    // mainTitle: {
+    //   type: Sequelize.STRING,
+    //   allowNull: false,
+    // },
     description: {
       type: Sequelize.STRING(50000),
       allowNull: false,
@@ -41,22 +41,22 @@ const Property = sequelize.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    propertyCategory: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
+    // propertyCategory: {
+    //   type: Sequelize.STRING,
+    //   allowNull: false,
+    // },
     propertySize: {
       type: Sequelize.FLOAT,
       allowNull: false,
     },
-    propertySizeUnit: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    propertyAge: {
-      type: Sequelize.FLOAT,
-      allowNull: false,
-    },
+    // propertySizeUnit: {
+    //   type: Sequelize.STRING,
+    //   allowNull: false,
+    // },
+    // propertyAge: {
+    //   type: Sequelize.FLOAT,
+    //   allowNull: false,
+    // },
     noOfBedroom: {
       type: Sequelize.INTEGER,
       allowNull: false,
@@ -146,7 +146,13 @@ const Property = sequelize.define(
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
+    locationLinkOfGoogleMap: {
+      type: Sequelize.STRING(50000),
+      allowNull: true,
+    },
+  
   },
+ 
   {
     freezeTableName: true,
   }
@@ -167,5 +173,17 @@ Property.belongsTo(Agency, {
   as: 'agency',
   allowNull: true,
 });
+
+
+sequelize.sync()
+  .then(() => {
+    console.log('Database and tables synced');
+  })
+  .catch((error) => {
+    console.error('Error syncing database:', error);
+  });
+
+
+// Property.sync({force:true})
 
 module.exports = Property;

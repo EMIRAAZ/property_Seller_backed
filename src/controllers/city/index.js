@@ -25,7 +25,7 @@ async function addCity(req, res) {
   const cityBody = {
     id: generateUniqueID(),
     name: body.name,
-    emirate: body.emirate,
+    // emirate: body.emirate,
   };
   const city = await cityService.addCityService(cityBody);
   return res.status(201).json({

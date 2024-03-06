@@ -27,6 +27,8 @@ if (process.env.NODE_ENV === 'development') {
     });
 }
 
+// sequelize.sync({force:true})
+
 sequelize
     .authenticate()
     .then(() => console.log('database connection established'))

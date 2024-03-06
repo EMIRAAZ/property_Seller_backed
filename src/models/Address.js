@@ -21,10 +21,10 @@ const Address = sequelize.define(
       type: Sequelize.STRING,
       allowNull: false,
     },
-    emirate: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
+    // emirate: {
+    //   type: Sequelize.STRING,
+    //   allowNull: false,
+    // },
     latitude: {
       type: Sequelize.DECIMAL(10, 8),
       allowNull: true,
@@ -33,11 +33,7 @@ const Address = sequelize.define(
       type: Sequelize.DECIMAL(11, 8),
       allowNull: true,
     },
-    locationLinkOfGoogleMap: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
-
+ 
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
   },
@@ -45,5 +41,17 @@ const Address = sequelize.define(
     freezeTableName: true,
   }
 );
+
+
+// sequelize.sync({force:true})
+//   .then(() => {
+//     console.log('Database and tables synced');
+//   })
+//   .catch((error) => {
+//     console.error('Error syncing database:', error);
+//   });
+
+
+
 
 module.exports = Address;

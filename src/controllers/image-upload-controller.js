@@ -14,12 +14,14 @@ async function uploadImage(req, res) {
   fs.unlinkSync(req.file.path);
 
   let downloadURL;
-  console.log(file);
+  // console.log(file.filename,'fileee');
+
+  // console.log(req.hostname)
 
   if (process.env.NODE_ENV === 'development') {
-    downloadURL = `${'127.0.0.1:3001'}/uploads/processed/${file.filename}`;
+    downloadURL = `/processed/${file.filename}`;
   } else
-    downloadURL = `${'https://propertyassistant.ae'}/uploads/processed/${file.filename}`;
+    downloadURL = `/processed/${file.filename}`;
 
   return res.status(201).json({
     status: 201,

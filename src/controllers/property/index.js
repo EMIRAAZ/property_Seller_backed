@@ -5,13 +5,13 @@ const verify = require('../../middleware/verify-token');
 
 async function addProperty(req, res) {
   const body = { ...req.body };
-
+console.log(req.body)
+// return true
   const addressBody = {
     id: generateUniqueID(),
     placeAddress: body.placeAddress,
     city: body.city,
-    emirate: body.emirate,
-    locationLinkOfGoogleMap:body.locationLinkOfGoogleMap,
+    // emirate: body.emirate,
     // latitude: body.coordinates.lat,
     // longitude: body.coordinates.lng,
     ...(body.building ? { building: body.building } : {}),
@@ -20,15 +20,16 @@ async function addProperty(req, res) {
   const propertyBody = {
     id: generateUniqueID(),
     title: body.title,
-    mainTitle: body.mainTitle,
+    // mainTitle: body.mainTitle,
+    locationLinkOfGoogleMap:body.locationLinkOfGoogleMap,
     description: body.description,
     images: body.images,
     price: body.price,
     propertyType: body.propertyType,
-    propertyCategory: body.propertyCategory,
+    // propertyCategory: body.propertyCategory,
     propertySize: body.propertySize,
-    propertySizeUnit: body.propertySizeUnit,
-    propertyAge: body.propertyAge,
+    // propertySizeUnit: body.propertySizeUnit,
+    // propertyAge: body.propertyAge,
     noOfBedroom: body.noOfBedroom,
     noOfBathroom: body.noOfBathroom,
     call: body.call,
@@ -68,6 +69,7 @@ async function addProperty(req, res) {
 
 async function listProperty(req, res) {
   const query = { ...req.query };
+  console.log(query)
   const properties = await propertyService.listPropertyService(query);
   return res.status(200).json({ status: 200, data: properties });
 }
@@ -82,6 +84,7 @@ async function listPropertyById(req, res) {
 async function updatePropertyById(req, res) {
   const { id } = req.params;
   const body = { ...req.body };
+  console.log(body)
   const property = await propertyService.updatePropertyById(id, body);
   return res.status(200).json({
     status: 200,
@@ -163,7 +166,28 @@ async function listPropertyByAgency(req, res) {
   return res.status(200).json({ status: 200, data: properties });
 }
 
+// get properties by params or not
+
+async function listPropertyByParms(req, res) {
+  const query = { ...req.query };
+  console.log('api')
+  console.log(query)
+  // return true
+  const agencyId = req.user._id;
+  const properties = await propertyService.listPropertyServiceByAgency(
+    agencyId,
+    query
+  );
+  return res.status(200).json({ status: 200, data: properties });
+}
+
+
 module.exports = {
+  getall: [
+    verify,
+    authRole(['ADMIN', 'AGENT', 'AGENCY']),
+    listPropertyByParms,
+  ],
   addProperty: [verify, authRole(['ADMIN', 'AGENT', 'AGENCY']), addProperty],
   listPropertyByAgency: [
     verify,
